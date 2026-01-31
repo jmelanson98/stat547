@@ -1,0 +1,47 @@
+\documentclass[11pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{plain}                                                      %%
+%%%%%%%%%% EXACT 1in MARGINS %%%%%%%                                   %%
+\setlength{\textwidth}{6.5in}     %%                                   %%
+\setlength{\oddsidemargin}{0in}   %% (It is recommended that you       %%
+\setlength{\evensidemargin}{0in}  %%  not change these parameters,     %%
+\setlength{\textheight}{8.5in}    %%  at the risk of having your       %%
+\setlength{\topmargin}{0in}       %%  proposal dismissed on the basis  %%
+\setlength{\headheight}{0in}      %%  of incorrect formatting!!!)      %%
+\setlength{\headsep}{0in}         %%                                   %%
+\setlength{\footskip}{0in}       %%                                   %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                                   %%
+\newcommand{\required}[1]{\section*{\hfil #1\hfil}}                    %%
+\renewcommand{\refname}{\hfil References Cited\hfil}                                      %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%PUT YOUR MACROS HERE
+\usepackage[backend=biber,style=authoryear,sorting=none]{biblatex}
+\addbibresource{phd_bombus.bib}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{sectsty}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\sectionfont{\normalsize\bfseries}
+
+\pagestyle{empty}
+
+
+
+\begin{document}
+\setcounter{page}{1}
+\begin{center}
+\large
+\textbf{STAT 547: Final Project Proposal} \\
+\normalsize
+Jenna Melanson
+\end{center}
+
+\textbf{Abstract} \\
+ 
+ For central-place foragers like bumblebees, the availability and spatial distribution of floral resources in close proximity to established nest sites is key for supporting colony growth and reproduction. In response to changing resource distributions, foragers can maximize their rate of energy intake through changes in foraging distance and patch choice/attraction. While these processes have been tested at small scales and in single species, theoretical models suggest that variation in traits linked to foraging scale and patch quality preference may disproportionately favour some ``winner" species in structurally simple landscapes. Using a spatial mark-recapture dataset (i.e., repeated observations of bumblebee colonymates at a set of discrete trapping locations), I investigated differences in foraging scale and its relation to patch-level floral quality and landscape-scale resource availability for two bumblebee species: a widespread native species and a rapidly expanding invasive known to prefer anthropogenically disturbed habitats. To do so, I developed and tested spatially explicit models in Stan; preliminary simulations suggested that the data carry more information regarding \emph{relative} foraging distance than \emph{absolute} foraging distance. Consequently, I show how a penalization term can be applied within models to constrain the scale of foraging to biologically realistic values, allowing for comparisons of the relative impacts of local/landscape-scale resource availability and species identity on foraging range. To support the use of this penalization, I present sensitivity analyses with simulated and empirical data, and perform posterior predictive checks to assess model-data agreement. Finally, I expand the model to incorporate multiple sampling timepoints and test its ability to accurately predict parameters governing the impacts of floral resource distributions on foraging scale using simulated data. The analyses provide insight regarding the behavioural mechanisms which have allowed a ``winner'' species to become highly dominant in simplified landscapes, and provide an example of robust application of the Bayesian workflow to a spatiotemporally complex ecological dataset.
+
+\end{document}

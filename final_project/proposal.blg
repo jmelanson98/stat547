@@ -1,0 +1,15 @@
+[0] Config.pm:328> INFO - This is Biber 2.21
+[0] Config.pm:331> INFO - Logfile is 'proposal.blg'
+[67] biber-darwin:342> INFO - === Tue Jan 27, 2026, 22:03:36
+[81] Biber.pm:421> INFO - Reading 'proposal.bcf'
+[175] Biber.pm:1002> INFO - Found 14 citekeys in bib section 0
+[187] Biber.pm:4487> INFO - Processing section 0
+[196] Biber.pm:4678> INFO - Looking for bibtex file 'phd_bombus.bib' for section 0
+[224] bibtex.pm:1713> INFO - LaTeX decoding ...
+[806] bibtex.pm:1519> INFO - Found BibTeX data source 'phd_bombus.bib'
+[970] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[970] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[970] Biber.pm:4307> INFO - Sorting list 'none/global//global/global/global' of type 'entry' with template 'none' and locale 'en-US'
+[970] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
+[985] bbl.pm:676> INFO - Writing 'proposal.bbl' with encoding 'UTF-8'
+[1004] bbl.pm:779> INFO - Output to proposal.bbl

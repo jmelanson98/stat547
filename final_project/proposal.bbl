@@ -1,0 +1,1041 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{kleinImportancePollinatorsChanging2006}{article}{}{}
+      \name{author}{7}{}{%
+        {{un=0,uniquepart=base,hash=b9a8366ef9871fe06ab5f5aa5d378aaa}{%
+           family={Klein},
+           familyi={K\bibinitperiod},
+           given={Alexandra-Maria},
+           giveni={A\bibinithyphendelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4a6de8cace0edd7d1d0413eb67f82b8e}{%
+           family={Vaissière},
+           familyi={V\bibinitperiod},
+           given={Bernard\bibnamedelima E},
+           giveni={B\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8d4d2865ed561dbd28d542ec8fc297f3}{%
+           family={Cane},
+           familyi={C\bibinitperiod},
+           given={James\bibnamedelima H},
+           giveni={J\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f3be02dcfb574c1a9e6e2838edf0c1f9}{%
+           family={Steffan-Dewenter},
+           familyi={S\bibinithyphendelim D\bibinitperiod},
+           given={Ingolf},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9869aa63a6709bdb12e659d1628390ab}{%
+           family={Cunningham},
+           familyi={C\bibinitperiod},
+           given={Saul\bibnamedelima A},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e64b7e31c52a065d95de7ad95073f872}{%
+           family={Kremen},
+           familyi={K\bibinitperiod},
+           given={Claire},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d8dadd8e9ecab2110f08403c31f19e24}{%
+           family={Tscharntke},
+           familyi={T\bibinitperiod},
+           given={Teja},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{2f8accaf136cc6f1781be88fd0cfadd7}
+      \strng{fullhash}{b0671e60831c5f6a2eeadf480e9af541}
+      \strng{fullhashraw}{b0671e60831c5f6a2eeadf480e9af541}
+      \strng{bibnamehash}{2f8accaf136cc6f1781be88fd0cfadd7}
+      \strng{authorbibnamehash}{2f8accaf136cc6f1781be88fd0cfadd7}
+      \strng{authornamehash}{2f8accaf136cc6f1781be88fd0cfadd7}
+      \strng{authorfullhash}{b0671e60831c5f6a2eeadf480e9af541}
+      \strng{authorfullhashraw}{b0671e60831c5f6a2eeadf480e9af541}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The extent of our reliance on animal pollination for world crop production for human food has not previously been evaluated and the previous estimates for countries or continents have seldom used primary data. In this review, we expand the previous estimates using novel primary data from 200 countries and found that fruit, vegetable or seed production from 87 of the leading global food crops is dependent upon animal pollination, while 28 crops do not rely upon animal pollination. However, global production volumes give a contrasting perspective, since 60\% of global production comes from crops that do not depend on animal pollination, 35\% from crops that depend on pollinators, and 5\% are unevaluated. Using all crops traded on the world market and setting aside crops that are solely passively self-pollinated, wind-pollinated or parthenocarpic, we then evaluated the level of dependence on animal-mediated pollination for crops that are directly consumed by humans. We found that pollinators are essential for 13 crops, production is highly pollinator dependent for 30, moderately for 27, slightly for 21, unimportant for 7, and is of unknown significance for the remaining 9. We further evaluated whether local and landscape-wide management for natural pollination services could help to sustain crop diversity and production. Case studies for nine crops on four continents revealed that agricultural intensification jeopardizes wild bee communities and their stabilizing effect on pollination services at the landscape scale.}
+      \field{issn}{0962-8452}
+      \field{journaltitle}{Proceedings of the Royal Society B: Biological Sciences}
+      \field{month}{10}
+      \field{number}{1608}
+      \field{title}{Importance of pollinators in changing landscapes for world crops}
+      \field{urlday}{28}
+      \field{urlmonth}{1}
+      \field{urlyear}{2026}
+      \field{volume}{274}
+      \field{year}{2006}
+      \field{urldateera}{ce}
+      \field{pages}{303\bibrangedash 313}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1098/rspb.2006.3721
+      \endverb
+      \verb{file}
+      \verb Full Text:/Users/jenna1/Zotero/storage/4U7Y54BU/Klein et al. - 2006 - Importance of pollinators in changing landscapes f.pdf:application/pdf;Snapshot:/Users/jenna1/Zotero/storage/GC3KIY9U/Importance-of-pollinators-in-changing-landscapes.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1098/rspb.2006.3721
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1098/rspb.2006.3721
+      \endverb
+    \endentry
+    \entry{eilersContributionPollinatorMediatedCrops2011a}{article}{}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=21b0ebd990e6fe79c42178b526a3cbe7}{%
+           family={Eilers},
+           familyi={E\bibinitperiod},
+           given={Elisabeth\bibnamedelima J.},
+           giveni={E\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e64b7e31c52a065d95de7ad95073f872}{%
+           family={Kremen},
+           familyi={K\bibinitperiod},
+           given={Claire},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4e79f5d6869d76a1d30df1687e7ec6ff}{%
+           family={Greenleaf},
+           familyi={G\bibinitperiod},
+           given={Sarah\bibnamedelima Smith},
+           giveni={S\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e1a84e7f5078e937d4630e07714f0467}{%
+           family={Garber},
+           familyi={G\bibinitperiod},
+           given={Andrea\bibnamedelima K.},
+           giveni={A\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b9a8366ef9871fe06ab5f5aa5d378aaa}{%
+           family={Klein},
+           familyi={K\bibinitperiod},
+           given={Alexandra-Maria},
+           giveni={A\bibinithyphendelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{da6ccca4ad528bb8076f1919ba7e2042}
+      \strng{fullhash}{6cddf75987c3ce678da277b2d6554843}
+      \strng{fullhashraw}{6cddf75987c3ce678da277b2d6554843}
+      \strng{bibnamehash}{da6ccca4ad528bb8076f1919ba7e2042}
+      \strng{authorbibnamehash}{da6ccca4ad528bb8076f1919ba7e2042}
+      \strng{authornamehash}{da6ccca4ad528bb8076f1919ba7e2042}
+      \strng{authorfullhash}{6cddf75987c3ce678da277b2d6554843}
+      \strng{authorfullhashraw}{6cddf75987c3ce678da277b2d6554843}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The contribution of nutrients from animal pollinated world crops has not previously been evaluated as a biophysical measure for the value of pollination services. This study evaluates the nutritional composition of animal-pollinated world crops. We calculated pollinator dependent and independent proportions of different nutrients of world crops, employing FAO data for crop production, USDA data for nutritional composition, and pollinator dependency data according to Klein et al. (2007). Crop plants that depend fully or partially on animal pollinators contain more than 90\% of vitamin C, the whole quantity of Lycopene and almost the full quantity of the antioxidants β-cryptoxanthin and β-tocopherol, the majority of the lipid, vitamin A and related carotenoids, calcium and fluoride, and a large portion of folic acid. Ongoing pollinator decline may thus exacerbate current difficulties of providing a nutritionally adequate diet for the global human population.}
+      \field{issn}{1932-6203}
+      \field{journaltitle}{PLOS ONE}
+      \field{month}{6}
+      \field{note}{Publisher: Public Library of Science}
+      \field{number}{6}
+      \field{title}{Contribution of {Pollinator}-{Mediated} {Crops} to {Nutrients} in the {Human} {Food} {Supply}}
+      \field{urlday}{28}
+      \field{urlmonth}{1}
+      \field{urlyear}{2026}
+      \field{volume}{6}
+      \field{year}{2011}
+      \field{urldateera}{ce}
+      \field{pages}{e21363}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1371/journal.pone.0021363
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:/Users/jenna1/Zotero/storage/9HFPH77H/Eilers et al. - 2011 - Contribution of Pollinator-Mediated Crops to Nutri.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0021363
+      \endverb
+      \verb{url}
+      \verb https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0021363
+      \endverb
+      \keyw{Beans,Crops,Diet,Food,Nutrients,Pollination,Vegetables,Vitamin E}
+    \endentry
+    \entry{emmersonChapterTwoHow2016}{incollection}{}{}
+      \name{author}{15}{}{%
+        {{un=0,uniquepart=base,hash=362c5cab56d06a0fe821b492763152ee}{%
+           family={Emmerson},
+           familyi={E\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=275187e53574d9954ab1e6bbc8cfac3f}{%
+           family={Morales},
+           familyi={M\bibinitperiod},
+           given={M.\bibnamedelimi B.},
+           giveni={M\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d921c240a6a89eef68d9eb13734d6bdb}{%
+           family={Oñate},
+           familyi={O\bibinitperiod},
+           given={J.\bibnamedelimi J.},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f17fb59c798facda326c6687a9f71006}{%
+           family={Batáry},
+           familyi={B\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f258e0011b224a23191e3251e077f908}{%
+           family={Berendse},
+           familyi={B\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9bfc28359728da425ab1a2cddaf3b4a7}{%
+           family={Liira},
+           familyi={L\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=38aea4696db6da549b4ccce30549c9e6}{%
+           family={Aavik},
+           familyi={A\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=429a22e0d9f8d9741a77e4422efa1c2c}{%
+           family={Guerrero},
+           familyi={G\bibinitperiod},
+           given={I.},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2db719fc214cda2d78d4b5496eb44bb1}{%
+           family={Bommarco},
+           familyi={B\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4c37212201170e8f6740227ef6675769}{%
+           family={Eggers},
+           familyi={E\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=78130709311fe0b93c6a2a87b0c22a94}{%
+           family={Pärt},
+           familyi={P\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=25842ec156ce2e78ab49341bb401fac0}{%
+           family={Tscharntke},
+           familyi={T\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a53501d8e0de709ec49a3582cf1178e6}{%
+           family={Weisser},
+           familyi={W\bibinitperiod},
+           given={W.},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d076fb5a88b703561ca031cdd937147a}{%
+           family={Clement},
+           familyi={C\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ee9f95ff37d35b5f757f809154dd413e}{%
+           family={Bengtsson},
+           familyi={B\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \name{editor}{3}{}{%
+        {{hash=ac05cb80900652b29cdde8c851a65fb4}{%
+           family={Dumbrell},
+           familyi={D\bibinitperiod},
+           given={Alex\bibnamedelima J.},
+           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=0926b23550290232f29e020e60b22fc5}{%
+           family={Kordas},
+           familyi={K\bibinitperiod},
+           given={Rebecca\bibnamedelima L.},
+           giveni={R\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=b06b7f209abdfdb38ea86e3dca769af7}{%
+           family={Woodward},
+           familyi={W\bibinitperiod},
+           given={Guy},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Academic Press}%
+      }
+      \strng{namehash}{968cacc4a245ee68066a72c732decb22}
+      \strng{fullhash}{b19e8064c56cbd86021d0faa517e2c2a}
+      \strng{fullhashraw}{b19e8064c56cbd86021d0faa517e2c2a}
+      \strng{bibnamehash}{968cacc4a245ee68066a72c732decb22}
+      \strng{authorbibnamehash}{968cacc4a245ee68066a72c732decb22}
+      \strng{authornamehash}{968cacc4a245ee68066a72c732decb22}
+      \strng{authorfullhash}{b19e8064c56cbd86021d0faa517e2c2a}
+      \strng{authorfullhashraw}{b19e8064c56cbd86021d0faa517e2c2a}
+      \strng{editorbibnamehash}{b2ad81f95a695e1a36177ad0dad8ca28}
+      \strng{editornamehash}{b2ad81f95a695e1a36177ad0dad8ca28}
+      \strng{editorfullhash}{b2ad81f95a695e1a36177ad0dad8ca28}
+      \strng{editorfullhashraw}{b2ad81f95a695e1a36177ad0dad8ca28}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{As the world's population continues to grow, the demand for food, fodder, fibre and bioenergy will increase. In Europe, the Common Agricultural Policy (CAP) has driven the intensification of agriculture, promoting the simplification and specialization of agroecosystems through the decline in landscape heterogeneity, the increased use of chemicals per unit area, and the abandonment of less fertile areas. In combination, these processes have eroded the quantity and quality of habitat for many plants and animals, and hence decreased biodiversity and the abundance of species across a hierarchy of trophic levels and spatial scales within Europe. This biodiversity loss has led to profound changes in the functioning of European agroecosystems over the last 50 years. Here, we synthesize the findings from a large-scale pan-European investigation of the combined effects of agricultural intensification on a range of agroecosystem services. These include (1) the persistence of high conservation value species; (2) the level of biological control of agricultural pests and (3) the functional diversity of a number of taxonomic groups, including birds, beetles and arable weeds. The study encompasses a gradient of geography-bioclimate and agricultural intensification that enables the large-scale measurement of ecological impacts of agricultural intensification across European agroecosystems. We provide an overview of the role of the CAP as a driver of agricultural intensification in the European Union, and we demonstrate compelling negative relationships between the application of pesticides and the various components of biodiversity studied on a pan-European scale.}
+      \field{booktitle}{Advances in {Ecological} {Research}}
+      \field{month}{1}
+      \field{series}{Large-{Scale} {Ecology}: {Model} {Systems} to {Global} {Perspectives}}
+      \field{title}{Chapter {Two} - {How} {Agricultural} {Intensification} {Affects} {Biodiversity} and {Ecosystem} {Services}}
+      \field{urlday}{22}
+      \field{urlmonth}{1}
+      \field{urlyear}{2025}
+      \field{volume}{55}
+      \field{year}{2016}
+      \field{urldateera}{ce}
+      \field{pages}{43\bibrangedash 97}
+      \range{pages}{55}
+      \verb{doi}
+      \verb 10.1016/bs.aecr.2016.08.005
+      \endverb
+      \verb{file}
+      \verb ScienceDirect Snapshot:/Users/jenna1/Zotero/storage/3259ZQHV/S0065250416300204.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0065250416300204
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0065250416300204
+      \endverb
+      \keyw{Biodiversity,Agriculture,Agroecology,Europe,Ecosystem services,Pesticide,Agricultural intensification,Landscape diversity,Scale}
+    \endentry
+    \entry{charnovOptimalForagingMarginal1976}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=50d6de3f5363432af8de9ed35235cf76}{%
+           family={Charnov},
+           familyi={C\bibinitperiod},
+           given={Eric\bibnamedelima L.},
+           giveni={E\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{50d6de3f5363432af8de9ed35235cf76}
+      \strng{fullhash}{50d6de3f5363432af8de9ed35235cf76}
+      \strng{fullhashraw}{50d6de3f5363432af8de9ed35235cf76}
+      \strng{bibnamehash}{50d6de3f5363432af8de9ed35235cf76}
+      \strng{authorbibnamehash}{50d6de3f5363432af8de9ed35235cf76}
+      \strng{authornamehash}{50d6de3f5363432af8de9ed35235cf76}
+      \strng{authorfullhash}{50d6de3f5363432af8de9ed35235cf76}
+      \strng{authorfullhashraw}{50d6de3f5363432af8de9ed35235cf76}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00405809}
+      \field{journaltitle}{Theoretical Population Biology}
+      \field{month}{4}
+      \field{number}{2}
+      \field{title}{Optimal foraging, the marginal value theorem}
+      \field{urlday}{28}
+      \field{urlmonth}{1}
+      \field{urlyear}{2026}
+      \field{volume}{9}
+      \field{year}{1976}
+      \field{urldateera}{ce}
+      \field{pages}{129\bibrangedash 136}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1016/0040-5809(76)90040-X
+      \endverb
+      \verb{file}
+      \verb Charnov - 1976 - Optimal foraging, the marginal value theorem.pdf:/Users/jenna1/Zotero/storage/DFKCZ53E/Charnov - 1976 - Optimal foraging, the marginal value theorem.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/004058097690040X
+      \endverb
+      \verb{url}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/004058097690040X
+      \endverb
+    \endentry
+    \entry{pykeOptimalForagingBumblebees1979}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=61729165029e442632f6fb3a2478e631}{%
+           family={Pyke},
+           familyi={P\bibinitperiod},
+           given={Graham\bibnamedelima H.},
+           giveni={G\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{61729165029e442632f6fb3a2478e631}
+      \strng{fullhash}{61729165029e442632f6fb3a2478e631}
+      \strng{fullhashraw}{61729165029e442632f6fb3a2478e631}
+      \strng{bibnamehash}{61729165029e442632f6fb3a2478e631}
+      \strng{authorbibnamehash}{61729165029e442632f6fb3a2478e631}
+      \strng{authornamehash}{61729165029e442632f6fb3a2478e631}
+      \strng{authorfullhash}{61729165029e442632f6fb3a2478e631}
+      \strng{authorfullhashraw}{61729165029e442632f6fb3a2478e631}
+      \field{extraname}{1}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{It is hypothesized that nectar-collecting bumblebees will be found to forage in ways that maximize their net rate of energy intake. Attention is focused, in this paper, on the manner in which these bumblebees move from one flower to another within inflorescences. Observations were made on workers of Bombus appositus, which were collecting nectar from Aconitum columbianum (monkshood). The rule of movement of the bumblebees was determined and compared, in terms of net rate of energy intake, with several possible alternative rules. Two of these alternatives gave equally high net rates of energy intake. The observed rule was very similar in nature to one of these and indistinguishable from both in terms of net rate of energy intake.}
+      \field{issn}{0003-3472}
+      \field{journaltitle}{Animal Behaviour}
+      \field{month}{11}
+      \field{shorttitle}{Optimal foraging in bumblebees}
+      \field{title}{Optimal foraging in bumblebees: {Rule} of movement between flowers within inflorescences}
+      \field{urlday}{28}
+      \field{urlmonth}{1}
+      \field{urlyear}{2026}
+      \field{volume}{27}
+      \field{year}{1979}
+      \field{urldateera}{ce}
+      \field{pages}{1167\bibrangedash 1181}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1016/0003-3472(79)90064-2
+      \endverb
+      \verb{file}
+      \verb ScienceDirect Snapshot:/Users/jenna1/Zotero/storage/SSXHQQ6A/0003347279900642.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/0003347279900642
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/0003347279900642
+      \endverb
+    \endentry
+    \entry{pykeOptimalForagingBumblebees1980}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=61729165029e442632f6fb3a2478e631}{%
+           family={Pyke},
+           familyi={P\bibinitperiod},
+           given={Graham\bibnamedelima H.},
+           giveni={G\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{61729165029e442632f6fb3a2478e631}
+      \strng{fullhash}{61729165029e442632f6fb3a2478e631}
+      \strng{fullhashraw}{61729165029e442632f6fb3a2478e631}
+      \strng{bibnamehash}{61729165029e442632f6fb3a2478e631}
+      \strng{authorbibnamehash}{61729165029e442632f6fb3a2478e631}
+      \strng{authornamehash}{61729165029e442632f6fb3a2478e631}
+      \strng{authorfullhash}{61729165029e442632f6fb3a2478e631}
+      \strng{authorfullhashraw}{61729165029e442632f6fb3a2478e631}
+      \field{extraname}{2}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{To test many predictions of “optimal foraging theory” it is necessary to calculate the rate of net energy intake of a foraging animal. Equations are derived for the calculation of the rate of net energy intake of a foraging bumblebee. The assumptions that form the basis of these energy equations are discussed. As examples, the rates of net energy intake are calculated for Bombus flavifrons workers foraging on neighboring patches of Aconitum columbianum and Delphinium barbeyi. If the bumblebees forage optimally, their net rates of energy intake in the two patches should be equal. The observed rates are consistent with this hypothesis. The application of an optimality approach to pollination biology is briefly discussed.}
+      \field{issn}{0040-5809}
+      \field{journaltitle}{Theoretical Population Biology}
+      \field{month}{4}
+      \field{number}{2}
+      \field{shorttitle}{Optimal foraging in bumblebees}
+      \field{title}{Optimal foraging in bumblebees: {Calculation} of net rate of energy intake and optimal patch choice}
+      \field{urlday}{28}
+      \field{urlmonth}{1}
+      \field{urlyear}{2026}
+      \field{volume}{17}
+      \field{year}{1980}
+      \field{urldateera}{ce}
+      \field{pages}{232\bibrangedash 246}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1016/0040-5809(80)90008-8
+      \endverb
+      \verb{file}
+      \verb ScienceDirect Snapshot:/Users/jenna1/Zotero/storage/WJN3YCF2/0040580980900088.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/0040580980900088
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/0040580980900088
+      \endverb
+    \endentry
+    \entry{popeSeasonalFoodScarcity2018}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=71d2e3084cd43d4dd7a4c98c1f4dfd1a}{%
+           family={Pope},
+           familyi={P\bibinitperiod},
+           given={Nathaniel\bibnamedelima S.},
+           giveni={N\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=df44b5f7307ff0dd0d251c5bd4d8b028}{%
+           family={Jha},
+           familyi={J\bibinitperiod},
+           given={Shalene},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{fb5a065c01512e726df56e8c4594f92c}
+      \strng{fullhash}{fb5a065c01512e726df56e8c4594f92c}
+      \strng{fullhashraw}{fb5a065c01512e726df56e8c4594f92c}
+      \strng{bibnamehash}{fb5a065c01512e726df56e8c4594f92c}
+      \strng{authorbibnamehash}{fb5a065c01512e726df56e8c4594f92c}
+      \strng{authornamehash}{fb5a065c01512e726df56e8c4594f92c}
+      \strng{authorfullhash}{fb5a065c01512e726df56e8c4594f92c}
+      \strng{authorfullhashraw}{fb5a065c01512e726df56e8c4594f92c}
+      \field{extraname}{1}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Foraging is an essential process for mobile animals, and its optimization serves as a foundational theory in ecology and evolution; however, drivers of foraging are rarely investigated across landscapes and seasons. Using a common bumblebee species from the western United States (Bombus vosnesenskii), we ask whether seasonal decreases in food resources prompt changes in foraging behavior and space use. We employ a unique integration of population genetic tools and spatially explicit foraging models to estimate foraging distances and rates of patch visitation for wild bumblebee colonies across three study regions and two seasons. By mapping the locations of 669 wild-caught individual foragers, we ﬁnd substantial variation in colony-level foraging distances, often exhibiting a 60-fold difference within a study region. Our analysis of visitation rates indicates that foragers display a preference for destination patches with high ﬂoral cover and forage signiﬁcantly farther for these patches, but only in the summer, when landscape-level resources are low. Overall, these results indicate that an increasing proportion of long-distance foraging bouts take place in the summer. Because wild bees are pollinators, their foraging dynamics are of urgent concern, given the potential impacts of global change on their movement and services. The behavioral shift toward long-distance foraging with seasonal declines in food resources suggests a novel, phenologically directed approach to landscape-level pollinator conservation and greater consideration of late-season ﬂoral resources in pollinator habitat management.}
+      \field{issn}{0003-0147, 1537-5323}
+      \field{journaltitle}{The American Naturalist}
+      \field{month}{1}
+      \field{number}{1}
+      \field{title}{Seasonal {Food} {Scarcity} {Prompts} {Long}-{Distance} {Foraging} by a {Wild} {Social} {Bee}}
+      \field{urlday}{31}
+      \field{urlmonth}{10}
+      \field{urlyear}{2021}
+      \field{volume}{191}
+      \field{year}{2018}
+      \field{urldateera}{ce}
+      \field{pages}{45\bibrangedash 57}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1086/694843
+      \endverb
+      \verb{file}
+      \verb Pope and Jha - 2018 - Seasonal Food Scarcity Prompts Long-Distance Forag.pdf:/Users/jenna1/Zotero/storage/LS3DBGHV/Pope and Jha - 2018 - Seasonal Food Scarcity Prompts Long-Distance Forag.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.journals.uchicago.edu/doi/10.1086/694843
+      \endverb
+      \verb{url}
+      \verb https://www.journals.uchicago.edu/doi/10.1086/694843
+      \endverb
+    \endentry
+    \entry{jhaResourceDiversityLandscapelevel2013}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=df44b5f7307ff0dd0d251c5bd4d8b028}{%
+           family={Jha},
+           familyi={J\bibinitperiod},
+           given={Shalene},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e64b7e31c52a065d95de7ad95073f872}{%
+           family={Kremen},
+           familyi={K\bibinitperiod},
+           given={Claire},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{0f6059307f12d37898889d0d70179ed4}
+      \strng{fullhash}{0f6059307f12d37898889d0d70179ed4}
+      \strng{fullhashraw}{0f6059307f12d37898889d0d70179ed4}
+      \strng{bibnamehash}{0f6059307f12d37898889d0d70179ed4}
+      \strng{authorbibnamehash}{0f6059307f12d37898889d0d70179ed4}
+      \strng{authornamehash}{0f6059307f12d37898889d0d70179ed4}
+      \strng{authorfullhash}{0f6059307f12d37898889d0d70179ed4}
+      \strng{authorfullhashraw}{0f6059307f12d37898889d0d70179ed4}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Given widespread declines in pollinator communities and increasing global reliance on pollinator-dependent crops, there is an acute need to develop a mechanistic understanding of native pollinator population and foraging biology. Using a population genetics approach, we determine the impact of habitat and floral resource distributions on nesting and foraging patterns of a critical native pollinator, Bombus vosnesenskii. Our findings demonstrate that native bee foraging is far more plastic and extensive than previously believed and does not follow a simple optimal foraging strategy. Rather, bumble bees forage further in pursuit of species-rich floral patches and in landscapes where patch-to-patch variation in floral resources is less, regardless of habitat composition. Thus, our results reveal extreme foraging plasticity and demonstrate that floral diversity, not density, drives bee foraging distance. Furthermore, we find a negative impact of paved habitat and a positive impact of natural woodland on bumble bee nesting densities. Overall, this study reveals that natural and human-altered landscapes can be managed for increased native bee nesting and extended foraging, dually enhancing biodiversity and the spatial extent of pollination services.}
+      \field{journaltitle}{Proceedings of the National Academy of Sciences}
+      \field{month}{1}
+      \field{number}{2}
+      \field{title}{Resource diversity and landscape-level homogeneity drive native bee foraging}
+      \field{volume}{110}
+      \field{year}{2013}
+      \field{pages}{555}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1073/pnas.1208682110
+      \endverb
+      \verb{urlraw}
+      \verb http://www.pnas.org/content/110/2/555.abstract
+      \endverb
+      \verb{url}
+      \verb http://www.pnas.org/content/110/2/555.abstract
+      \endverb
+    \endentry
+    \entry{bolinScaledependentForagingTradeoff2018}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=f24406d28f2a6ef9135b4c4df0a0912c}{%
+           family={Bolin},
+           familyi={B\bibinitperiod},
+           given={Arvid},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7b119f21bbfcc9112a32ba56018635af}{%
+           family={Smith},
+           familyi={S\bibinitperiod},
+           given={Henrik},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=54c6299eefe0b70f25429719785b3433}{%
+           family={Lonsdorf},
+           familyi={L\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=23c05ee8f0cff0af3f9dc13c69f05de3}{%
+           family={Olsson},
+           familyi={O\bibinitperiod},
+           given={Ola},
+           giveni={O\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{58c88dfd5cf7bcbf90e3f2df8b98eec7}
+      \strng{fullhash}{4be38ddcc1857e0ddd46444ce093e16f}
+      \strng{fullhashraw}{4be38ddcc1857e0ddd46444ce093e16f}
+      \strng{bibnamehash}{58c88dfd5cf7bcbf90e3f2df8b98eec7}
+      \strng{authorbibnamehash}{58c88dfd5cf7bcbf90e3f2df8b98eec7}
+      \strng{authornamehash}{58c88dfd5cf7bcbf90e3f2df8b98eec7}
+      \strng{authorfullhash}{4be38ddcc1857e0ddd46444ce093e16f}
+      \strng{authorfullhashraw}{4be38ddcc1857e0ddd46444ce093e16f}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In spatially heterogeneous environments, coexistence between competing species can be facilitated by spatially mediated tradeoffs. In this paper we develop a mechanistic model to investigate under which circumstances interspecific differences in the tradeoff between foraging efficiency and travel costs can allow two central‐place foraging species to coexist in spite of considerable overlap in resource use. One species (Flyer) has a high basal metabolic rate, but a low relative cost of travelling such that it can use patches at a greater distance from its central place while the minimum patch quality it can economically use is high. The other species (Forager), by contrast, has a lower basal metabolic rate, but higher relative cost of travelling, and can therefore be a more efficient forager and able to use foraging patches of low quality, as long as they are not too far from the nest. We demonstrate that the coexistence of these two species critically depends on landscape composition and structure, with the Flyer outcompeting the Forager in structurally simple, coarse‐grained, landscapes with abundant high‐quality forage and the Forager outcompeting the Flyer in fine‐grained highly diverse landscapes. Coexistence between the two species is possible when the landscape is structurally and compositionally complex, fine‐grained, and has both high and low quality forage. Our results demonstrate that exploitative competition between two contrasting life histories can produce very different community dynamics depending on landscape composition and structure. This article is protected by copyright. All rights reserved.}
+      \field{journaltitle}{Oikos}
+      \field{month}{5}
+      \field{title}{Scale-dependent foraging tradeoff allows competitive coexistence}
+      \field{volume}{127}
+      \field{year}{2018}
+      \verb{doi}
+      \verb 10.1111/oik.05072
+      \endverb
+    \endentry
+    \entry{looneyExpandingPacificNorthwest2019a}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=9a8515b744fa9077f719f772ee16e877}{%
+           family={Looney},
+           familyi={L\bibinitperiod},
+           given={Chris},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=babfa800babc6e72879305752d6d70d5}{%
+           family={Strange},
+           familyi={S\bibinitperiod},
+           given={James\bibnamedelima P.},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=61201de2ca27d1c3cd296283ddf55a4b}{%
+           family={Freeman},
+           familyi={F\bibinitperiod},
+           given={Maggie},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=902333c7c6ef95187367dddc4e3b20c4}{%
+           family={Jennings},
+           familyi={J\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{9ff8cc65758c4677d2f301c65415ace0}
+      \strng{fullhash}{2d469179f7371a088ce2971fc783dbb0}
+      \strng{fullhashraw}{2d469179f7371a088ce2971fc783dbb0}
+      \strng{bibnamehash}{9ff8cc65758c4677d2f301c65415ace0}
+      \strng{authorbibnamehash}{9ff8cc65758c4677d2f301c65415ace0}
+      \strng{authornamehash}{9ff8cc65758c4677d2f301c65415ace0}
+      \strng{authorfullhash}{2d469179f7371a088ce2971fc783dbb0}
+      \strng{authorfullhashraw}{2d469179f7371a088ce2971fc783dbb0}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1387-3547, 1573-1464}
+      \field{journaltitle}{Biological Invasions}
+      \field{month}{6}
+      \field{number}{6}
+      \field{title}{The expanding {Pacific} {Northwest} range of {Bombus} impatiens {Cresson} and its establishment in {Washington} {State}}
+      \field{urlday}{12}
+      \field{urlmonth}{12}
+      \field{urlyear}{2024}
+      \field{volume}{21}
+      \field{year}{2019}
+      \field{urldateera}{ce}
+      \field{pages}{1879\bibrangedash 1885}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1007/s10530-019-01970-6
+      \endverb
+      \verb{urlraw}
+      \verb http://link.springer.com/10.1007/s10530-019-01970-6
+      \endverb
+      \verb{url}
+      \verb http://link.springer.com/10.1007/s10530-019-01970-6
+      \endverb
+    \endentry
+    \entry{averillParasitePrevalenceMay2021}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=4bdc13a15cedada1538ae57ae2e91bd2}{%
+           family={Averill},
+           familyi={A\bibinitperiod},
+           given={Anne\bibnamedelima L.},
+           giveni={A\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b99800b2f0ab63106652d2cd1a75b69e}{%
+           family={Couto},
+           familyi={C\bibinitperiod},
+           given={Andrea\bibnamedelima V.},
+           giveni={A\bibinitperiod\bibinitdelim V\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ecfb5e79b7da2b0f99bdf1e45cef98f8}{%
+           family={Andersen},
+           familyi={A\bibinitperiod},
+           given={Jeremy\bibnamedelima C.},
+           giveni={J\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=cb78281ead33267b46454bd30083caf1}{%
+           family={Elkinton},
+           familyi={E\bibinitperiod},
+           given={Joseph\bibnamedelima S.},
+           giveni={J\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{b73b2ea58b986c7af3dcf12e83efe420}
+      \strng{fullhash}{2dc98a09e90bee6ba6a5074d991a3ebe}
+      \strng{fullhashraw}{2dc98a09e90bee6ba6a5074d991a3ebe}
+      \strng{bibnamehash}{b73b2ea58b986c7af3dcf12e83efe420}
+      \strng{authorbibnamehash}{b73b2ea58b986c7af3dcf12e83efe420}
+      \strng{authornamehash}{b73b2ea58b986c7af3dcf12e83efe420}
+      \strng{authorfullhash}{2dc98a09e90bee6ba6a5074d991a3ebe}
+      \strng{authorfullhashraw}{2dc98a09e90bee6ba6a5074d991a3ebe}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Numerous studies have reported a diversity of stressors that may explain continental-scale declines in populations of native pollinators, particularly those in the genus Bombus. However, there has been little focus on the identification of the local-scale dynamics that may structure currently impoverished Bombus communities. For example, the historically diverse coastal-zone communities of New England (USA) now comprise only a few species and are primarily dominated by a single species, B. impatiens. To better understand the local-scale factors that might be influencing this change in community structure, we examined differences in the presence of parasites in different species of Bombus collected in coastal-zone communities. Our results indicate that Bombus species that are in decline in this region were more likely to harbor parasites than are B. impatiens populations, which were more likely to be parasite-free and to harbor fewer intense infections or co-infections. The contrasting parasite burden between co-occurring winners and losers in this community may impact the endgame of asymmetric contests among species competing for dwindling resources. We suggest that under changing climate and landscape conditions, increasing domination of communities by healthy, synanthropic Bombus species (such as B. impatiens) may be another factor hastening the further erosion of bumble bee diversity.}
+      \field{issn}{2075-4450}
+      \field{journaltitle}{Insects}
+      \field{month}{10}
+      \field{note}{Number: 10 Publisher: Multidisciplinary Digital Publishing Institute}
+      \field{number}{10}
+      \field{title}{Parasite {Prevalence} {May} {Drive} the {Biotic} {Impoverishment} of {New} {England} ({USA}) {Bumble} {Bee} {Communities}}
+      \field{urlday}{17}
+      \field{urlmonth}{1}
+      \field{urlyear}{2025}
+      \field{volume}{12}
+      \field{year}{2021}
+      \field{urldateera}{ce}
+      \field{pages}{941}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/insects12100941
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:/Users/jenna1/Zotero/storage/C56JR3AZ/Averill et al. - 2021 - Parasite Prevalence May Drive the Biotic Impoveris.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.mdpi.com/2075-4450/12/10/941
+      \endverb
+      \verb{url}
+      \verb https://www.mdpi.com/2075-4450/12/10/941
+      \endverb
+      \keyw{community ecology,pathogens,\textit{Bombus},\textit{Crithidia},\textit{Nosema},competition,pollinator health}
+    \endentry
+    \entry{grattonLocalHabitatType2023}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=7c075160fda38f0db4c4f4163fb0275c}{%
+           family={Gratton},
+           familyi={G\bibinitperiod},
+           given={Elena\bibnamedelima M},
+           giveni={E\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=caafc0bbe8a1c7b7a8438633f5feb748}{%
+           family={McNeil},
+           familyi={M\bibinitperiod},
+           given={Darin\bibnamedelima J},
+           giveni={D\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0,
+           suffix={Jr},
+           suffixi={J\bibinitperiod},
+           suffixun=0}}%
+        {{un=0,uniquepart=base,hash=fccd30fbb0d808981fdc60a7b9704ad7}{%
+           family={Grozinger},
+           familyi={G\bibinitperiod},
+           given={Christina\bibnamedelima M},
+           giveni={C\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3dafd4816c46e586585b113e7c84c8fb}{%
+           family={Hines},
+           familyi={H\bibinitperiod},
+           given={Heather\bibnamedelima M},
+           giveni={H\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{ddaa28f1f5cf37b0a0c9d95c975a6246}
+      \strng{fullhash}{7247c708c2f2a269db2941ad2c0cdfd0}
+      \strng{fullhashraw}{7247c708c2f2a269db2941ad2c0cdfd0}
+      \strng{bibnamehash}{ddaa28f1f5cf37b0a0c9d95c975a6246}
+      \strng{authorbibnamehash}{ddaa28f1f5cf37b0a0c9d95c975a6246}
+      \strng{authornamehash}{ddaa28f1f5cf37b0a0c9d95c975a6246}
+      \strng{authorfullhash}{7247c708c2f2a269db2941ad2c0cdfd0}
+      \strng{authorfullhashraw}{7247c708c2f2a269db2941ad2c0cdfd0}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Bumble bees (Hymenoptera: Apidae, Bombus Latreille) perform important ecological services in both managed and natural ecosystems. Anthropogenically induced change has altered floral resources, climate, and insecticide exposure, factors that impact health and disease levels in these bees. Habitat management presents a solution for improving bee health and biodiversity, but this requires better understanding of how different pathogens and bee species respond to habitat conditions. We take advantage of the washboard of repeated ridges (forested) and valleys (mostly developed) in central Pennsylvania to examine whether local variation in habitat type and other landscape factors influence bumble bee community composition and levels of 4 leading pathogens in the common eastern bumble bee, Bombus impatiens Cresson. Loads of viruses (DWV and BQCV) were found to be lowest in forest habitats, whereas loads of a gut parasite, Crithidia bombi, were highest in forests. Ridgetop forests hosted the most diverse bumble bee communities, including several habitat specialists. B. impatiens was most abundant in valleys, and showed higher incidence in areas of greater disturbance, including more developed, unforested, and lower floral resource sites, a pattern which mirrors its success in the face of anthropogenic change. Additionally, DNA barcoding revealed that B. sandersoni is much more common than is apparent from databases. Our results provide evidence that habitat type can play a large role in pathogen load dynamics, but in ways that differ by pathogen type, and point to a need for consideration of habitat at both macro-ecological and local spatial scales.}
+      \field{issn}{0046-225X}
+      \field{journaltitle}{Environmental Entomology}
+      \field{month}{6}
+      \field{number}{3}
+      \field{title}{Local habitat type influences bumble bee pathogen loads and bee species distributions}
+      \field{urlday}{5}
+      \field{urlmonth}{4}
+      \field{urlyear}{2025}
+      \field{volume}{52}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \field{pages}{491\bibrangedash 501}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1093/ee/nvad027
+      \endverb
+      \verb{file}
+      \verb Snapshot:/Users/jenna1/Zotero/storage/WAW3QUQ3/7150786.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1093/ee/nvad027
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1093/ee/nvad027
+      \endverb
+    \endentry
+    \entry{carpenterStanProbabilisticProgramming2017}{article}{}{}
+      \name{author}{10}{}{%
+        {{un=0,uniquepart=base,hash=5321a7ac2b0407bc405fa8816fd73f09}{%
+           family={Carpenter},
+           familyi={C\bibinitperiod},
+           given={Bob},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1e1eb60e3b6e222217bf8e9b24070b28}{%
+           family={Gelman},
+           familyi={G\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=937991c72400f4d0e0252027c8c03f67}{%
+           family={Hoffman},
+           familyi={H\bibinitperiod},
+           given={Matthew\bibnamedelima D.},
+           giveni={M\bibinitperiod\bibinitdelim D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fb04571d965766ee6d71dafbd3eb452e}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9cc812cde8c441e79dfaab4955a72c2c}{%
+           family={Goodrich},
+           familyi={G\bibinitperiod},
+           given={Ben},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1982fa604a3f94837efceaa53330b2a4}{%
+           family={Betancourt},
+           familyi={B\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=13e542215366001a04c3d21163d79458}{%
+           family={Brubaker},
+           familyi={B\bibinitperiod},
+           given={Marcus},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=41eee90a96d38ce11a198e6c0aeb415f}{%
+           family={Guo},
+           familyi={G\bibinitperiod},
+           given={Jiqiang},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=137297e0019ba55bca6f9b200782ae52}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6f0d8885ad4c012b0ced0ee95cdf2729}{%
+           family={Riddell},
+           familyi={R\bibinitperiod},
+           given={Allen},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{315a7c9e1cdeecc523de3b4d0e029d66}
+      \strng{fullhash}{29572594759b21c576aa9533a18a00d1}
+      \strng{fullhashraw}{29572594759b21c576aa9533a18a00d1}
+      \strng{bibnamehash}{315a7c9e1cdeecc523de3b4d0e029d66}
+      \strng{authorbibnamehash}{315a7c9e1cdeecc523de3b4d0e029d66}
+      \strng{authornamehash}{315a7c9e1cdeecc523de3b4d0e029d66}
+      \strng{authorfullhash}{29572594759b21c576aa9533a18a00d1}
+      \strng{authorfullhashraw}{29572594759b21c576aa9533a18a00d1}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Stan is a probabilistic programming language for specifying statistical models. A Stan program imperatively defines a log probability function over parameters conditioned on specified data and constants. As of version 2.14.0, Stan provides full Bayesian inference for continuous-variable models through Markov chain Monte Carlo methods such as the No-U-Turn sampler, an adaptive form of Hamiltonian Monte Carlo sampling. Penalized maximum likelihood estimates are calculated using optimization methods such as the limited memory Broyden-Fletcher-Goldfarb-Shanno algorithm. Stan is also a platform for computing log densities and their gradients and Hessians, which can be used in alternative algorithms such as variational Bayes, expectation propagation, and marginal inference using approximate integration. To this end, Stan is set up so that the densities, gradients, and Hessians, along with intermediate quantities of the algorithm such as acceptance probabilities, are easily accessible. Stan can be called from the command line using the cmdstan package, through R using the rstan package, and through Python using the pystan package. All three interfaces support sampling and optimization-based inference with diagnostics and posterior analysis. rstan and pystan also provide access to log probabilities, gradients, Hessians, parameter transforms, and specialized plotting.}
+      \field{issn}{1548-7660}
+      \field{journaltitle}{Journal of Statistical Software}
+      \field{month}{1}
+      \field{shorttitle}{Stan}
+      \field{title}{Stan: {A} {Probabilistic} {Programming} {Language}}
+      \field{urlday}{8}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{volume}{76}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \field{pages}{1\bibrangedash 32}
+      \range{pages}{32}
+      \verb{doi}
+      \verb 10.18637/jss.v076.i01
+      \endverb
+      \verb{file}
+      \verb Full Text:/Users/jenna1/Zotero/storage/T2JWMGEK/Carpenter et al. - 2017 - Stan A Probabilistic Programming Language.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.18637/jss.v076.i01
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.18637/jss.v076.i01
+      \endverb
+      \keyw{Bayesian inference,Stan,algorithmic differentiation,probabilistic programming}
+    \endentry
+    \entry{popeInferringForagingRanges2017}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=71d2e3084cd43d4dd7a4c98c1f4dfd1a}{%
+           family={Pope},
+           familyi={P\bibinitperiod},
+           given={Nathaniel\bibnamedelima S.},
+           giveni={N\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=df44b5f7307ff0dd0d251c5bd4d8b028}{%
+           family={Jha},
+           familyi={J\bibinitperiod},
+           given={Shalene},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{fb5a065c01512e726df56e8c4594f92c}
+      \strng{fullhash}{fb5a065c01512e726df56e8c4594f92c}
+      \strng{fullhashraw}{fb5a065c01512e726df56e8c4594f92c}
+      \strng{bibnamehash}{fb5a065c01512e726df56e8c4594f92c}
+      \strng{authorbibnamehash}{fb5a065c01512e726df56e8c4594f92c}
+      \strng{authornamehash}{fb5a065c01512e726df56e8c4594f92c}
+      \strng{authorfullhash}{fb5a065c01512e726df56e8c4594f92c}
+      \strng{authorfullhashraw}{fb5a065c01512e726df56e8c4594f92c}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A knowledge of the distances regularly travelled by foraging bees is essential to understanding the movement of pollen across landscapes, and has implications for the conservation of both pollinators and plants. Unfortunately, the movements of bees are difﬁcult to measure directly at ecologically relevant scales. A common strategy for quantifying the foraging ranges of social bees is to sample the genotypes of foragers across a landscape. Individual foragers can be assigned to colonies with polymorphic genetic markers, and the dispersion of siblings in space can be used to make inference about colony locations and foraging movements. Several previous studies have sampled sibling genotypes at discrete locations (for example, at regular points along a transect), rather than in continuous space. Restricting the collection of bees to discrete locations presents a number of considerations for sampling design and data analysis. In this paper, we develop a spatially-explicit, modelbased framework for the simulation and estimation of foraging ranges. Using these tools, we simulated experiments to characterise the efﬁcacy of different sampling strategies, and provide an example with actual data that demonstrates the advantages of our method over an approach based on regression.}
+      \field{issn}{1566-0621, 1572-9737}
+      \field{journaltitle}{Conservation Genetics}
+      \field{month}{6}
+      \field{number}{3}
+      \field{title}{Inferring the foraging ranges of social bees from sibling genotypes sampled across discrete locations}
+      \field{urlday}{1}
+      \field{urlmonth}{11}
+      \field{urlyear}{2021}
+      \field{volume}{18}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \field{pages}{645\bibrangedash 658}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1007/s10592-017-0941-y
+      \endverb
+      \verb{file}
+      \verb Pope and Jha - 2017 - Inferring the foraging ranges of social bees from .pdf:/Users/jenna1/Zotero/storage/MXJ4MLQJ/Pope and Jha - 2017 - Inferring the foraging ranges of social bees from .pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://link.springer.com/10.1007/s10592-017-0941-y
+      \endverb
+      \verb{url}
+      \verb http://link.springer.com/10.1007/s10592-017-0941-y
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

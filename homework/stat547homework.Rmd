@@ -1,0 +1,1108 @@
+---
+title: 'STAT 547: Homework'
+author: "Jenna Melanson"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    latex_engine: xelatex
+  html_document: default
+header-includes:
+  - \usepackage{float}
+  - \floatplacement{figure}{H}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(rstan)
+library(bayesplot)
+library(kableExtra)
+library(dplyr)
+library(ggplot2)
+library(matrixStats)
+library(mvtnorm)
+library(posterior)
+library(tidyr)
+library(gridExtra)
+library(tibble)
+setwd("~/Documents/UBC/coursework/stat547/homework")
+```
+
+
+# Exercise 1
+
+### a) A Stan program for the simple pharmacokinetic model 
+
+```{stan, output.var="model1", eval = FALSE, code=readLines('models/simple_pharmacokinetic.stan')}
+```
+
+
+### b) Fitting the model 
+
+I fit the model with 4 chains of 2000 iterations each (1000 warm up, 1000 sampling). There were no divergent transitions, and the model fit produces the following summary statistics and diagnostics for our parameters of interest:
+```{r prep and run stan, eval = FALSE, echo = FALSE}
+# Prepare data for stan
+data = list()
+data$y = c(3.79, 5.80, 12.79, 15.52, 9.98, 18.65, 13.21, 13.91, 8.16, 4.81, 4.59, 2.23)
+data$timepoints = c(0.083, 0.167, 0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4, 6, 8)
+data$N = length(data$timepoints)
+data$u0 = c(1200,0)
+data$t0 = 0
+
+stanfile = "models/simple_pharmacokinetic.stan" 
+
+simpleFit = stan(file = stanfile,
+               data = data, seed = 5838299,
+               chains = 4, cores = 4,
+               iter = 2000,
+               verbose = TRUE,
+               pars = c("u"),
+               include = FALSE )
+saveRDS(simpleFit, "modelfits/simplefit.rds")
+
+
+```
+
+```{r simple model summary, echo = FALSE}
+simplefit = readRDS("modelfits/simplefit.rds")
+
+# Pretty print with kableExtra
+as.data.frame(summary(simplefit)$summary) %>%
+  slice(1:4) %>%
+kable(digits = 3, caption = "") %>%
+  kable_styling(full_width = F, bootstrap_options = c("striped", "hover"))
+
+```
+The effective sample size (n_eff) is greater than 1000 for all four parameters. While it is difficult to say what precise ESS is "necessary," from an inferential standpoint, the Monte Carlo Standard Errors (se_mean) are quite small in comparison to the posterior standard deviations (sd), suggesting that we have drawn enough samples to reduce the persistent variance of our chain. Values for Rhat are all very close to 1 (<1.01), suggesting that the chains have converged (i.e., the chains have come reasonably close to the stationary distribution and are sampling from the same region of parameter space; the non-stationary variance has approached zero). We can additionally look at some traceplots to verify that the chains are mixing well visually, and to check for any signs of periodicity:
+
+```{r traceplots, echo=FALSE}
+traceplot(simplefit, pars=c("ka", "CL", "Vcent", "sigma"))
+```
+
+Finally, lets produce some posterior predictive (retrodictive) checks to assess whether our model can make accurate "predictions" and quantify uncertainty around those predictions. Below I show the original observed values of y ($C(t)$), overlaid by estimates of y_rep from the `generated quantities` block.
+
+```{r echo=FALSE,out.width="100%", fig.align='center'}
+y = c(3.79, 5.80, 12.79, 15.52, 9.98, 18.65, 13.21, 13.91, 8.16, 4.81, 4.59, 2.23)
+timepoints = c(0.083, 0.167, 0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4, 6, 8)
+
+color_scheme_set("pink")
+plot = ppc_ribbon(y, yrep = rstan::extract(simplefit, pars = c("ucent_pred"))$ucent_pred[1:1000,], x = timepoints, y_draw = "points")
+
+plot + theme_classic()
+```
+
+
+There appear to be some oscillations (maybe noise/measurement error...) that are not accounted for by the model's central tendency. In addition the model does not capture the tail behaviour very well---the observed concentrations drop off more rapidly around t = 3-4 than anticipated by the model. Fortunately, the model does a good job of quantifying its uncertainty to accomodate these deviations, with a large posterior predictive confidence interval encompassing > 90% of the data. But it would seem that there may be some biological processes unaccounted for by the two-compartment model.
+
+### c) Incorporating the peripheral compartment 
+
+Ahh, a more sophisticated model! How convenient!
+
+We can fit this model using the following Stan program:
+
+```{stan, output.var="model1", eval = FALSE, code=readLines('models/peripheral_pharmacokinetic.stan')}
+```
+
+Assuming $u_{peri}(0) = 0$, our model produces the following posterior predictions:
+
+```{r run stan peripheral model, eval = FALSE, echo = FALSE}
+# Prepare data for stan
+data = list()
+data$y = c(3.79, 5.80, 12.79, 15.52, 9.98, 18.65, 13.21, 13.91, 8.16, 4.81, 4.59, 2.23)
+data$timepoints = c(0.083, 0.167, 0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4, 6, 8)
+data$N = length(data$timepoints)
+data$u0 = c(1200,0, 0)
+data$t0 = 0
+
+stanfile = "models/peripheral_pharmacokinetic.stan" 
+
+periFit = stan(file = stanfile,
+               data = data, seed = 5838299,
+               chains = 4, cores = 4,
+               iter = 2000,
+               verbose = TRUE,
+               pars = c("u"),
+               include = FALSE )
+saveRDS(periFit, "modelfits/perifit.rds")
+
+```
+
+```{r echo=FALSE,out.width="100%", fig.align='center'}
+perifit = readRDS("modelfits/perifit.rds")
+
+y = c(3.79, 5.80, 12.79, 15.52, 9.98, 18.65, 13.21, 13.91, 8.16, 4.81, 4.59, 2.23)
+timepoints = c(0.083, 0.167, 0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4, 6, 8)
+
+color_scheme_set("green")
+periplot = ppc_ribbon(y, yrep = rstan::extract(perifit, pars = c("ucent_pred"))$ucent_pred[1:1000,], x = timepoints, y_draw = "points")
+
+periplot + theme_classic()
+```
+
+The central tendency of the new model appears to more accurately match the observed data, particulary around t = 3-4. The predictive confidence intervals are also narrower, but still encompass all of the datapoints.
+
+But which model is really better? We can perform leave-one-out cross validation to check.
+
+```{r LOO checks, echo = FALSE}
+loo_simple = rstan::loo(simplefit,
+                        pars = "log_lik")
+loo_peri = rstan::loo(perifit,
+                        pars = "log_lik")
+print(loo_simple)
+print(loo_peri)
+
+```
+
+Ahh, but of course you would not make this *too* easy. One of the datapoints has a high Pareto k value (k = 0.855) when we perform leave-one-out cross validation with the simpler model, meaning that we cannot trust our overall estimate of `elpd_loo` for that model. (I might argue that this alone suggests that the model including peripheral absorption is a better fit to the data, but presumably the *most correct* approach would be to compute `elpd_loo` manually for this model.)
+
+To do this I will fit the model to the data *without* the problematic datapoint (y[5]) and compute the log-likelihood of the held out value based on parameter posteriors from the holdout model:
+
+$$
+\widehat{\mathrm{elpd}}_5
+=
+\log \left(
+\frac{1}{S}\sum_{s=1}^{S}
+p\!\left(y_5 \mid \theta^{(s)}_{-5}\right)
+\right)
+$$
+
+where $S$ is the number of posterior samples. We can compute this as:
+
+$$
+\widehat{\mathrm{elpd}}_5
+=
+\operatorname{log\_sum\_exp}
+\left(
+\log p\!\left(y_5 \mid \theta^{(s)}_{-5}\right)
+\right)
+-
+\log S
+$$
+using log likelihood values from the `generated quantities` block. 
+
+First, I'll refit the model and perform another posterior predictive check, just to ensure that I've coded it out properly.
+
+```{r, eval = FALSE, echo = FALSE}
+data = list()
+data$y = c(3.79, 5.80, 12.79, 15.52, 18.65, 13.21, 13.91, 8.16, 4.81, 4.59, 2.23)
+data$timepoints = c(0.083, 0.167, 0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8)
+data$N = length(data$timepoints)
+data$u0 = c(1200,0)
+data$t0 = 0
+data$holdout_t = array(0.75, dim = 1)
+data$holdout_y = array(9.98, dim = 1)
+
+stanfile = "models/holdout_pharmacokinetic.stan" 
+
+holdoutfit = stan(file = stanfile,
+               data = data, seed = 5838299,
+               chains = 4, cores = 4,
+               iter = 2000,
+               verbose = TRUE,
+               pars = c("u"),
+               include = FALSE )
+saveRDS(holdoutfit, "modelfits/holdoutfit.rds")
+```
+
+
+```{r echo=FALSE,out.width="100%", fig.align='center'}
+holdoutfit = readRDS("modelfits/holdoutfit.rds")
+
+y = c(3.79, 5.80, 12.79, 15.52, 18.65, 13.21, 13.91, 8.16, 4.81, 4.59, 2.23)
+timepoints = c(0.083, 0.167, 0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8)
+
+color_scheme_set("blue")
+holdoutplot = ppc_ribbon(y, yrep = rstan::extract(holdoutfit, pars = c("ucent_pred"))$ucent_pred, x = timepoints, y_draw = "points")
+
+holdoutplot + 
+  geom_point(aes(x = 0.75, y = 9.98), color = "red") +
+  geom_point(aes(x = 0.75, y = median(rstan::extract(holdoutfit, pars = c("holdout_pred"))$holdout_pred)), color = "blue") +
+  theme_classic()
+
+```
+
+The red point is the one which we have held out (unsurprising that this has a high Pareto k value...it's a bit of an outlier!). The filled blue point is the posterior median of the predictions for the held-out timepoint (t = 0.75). The prediction doesn't fall perfectly on the "smoothed" curve, but that's not surprising given that the smooth curve is based on only 11 timepoints. If I created a fine-scale grid of timepoints at which to compute the predicted values, the curve would look less choppy and I suspect that my predicted holdout value would be pretty spot-on. Sanity check complete!
+
+```{r, echo = FALSE}
+holdout_loglik = rstan::extract(holdoutfit, pars = c("holdout_log_lik"))$holdout_log_lik
+elpd_exact = logSumExp(holdout_loglik) - log(length(holdout_loglik))
+```
+
+Next we can compute that $\widehat{\mathrm{elpd}}_5 =$ `r round(elpd_exact,3)`, using log-likelihood values from the `generated quantities` block and the equation above.
+
+This is great but it's only one value! Next we must add this value to the other PSIS estimates for the model, giving us a total `elpd_loo` value for the simple model of `r round(sum(elpd_exact, loo_simple$pointwise[-5,"elpd_loo"]), 3)`.
+
+Based on a bit of reading, it seems that we should also perform this "replacement" with the exact value for the second model, if we want the comparison to be valid.
+
+```{r, eval=FALSE, echo = FALSE}
+data = list()
+data$y = c(3.79, 5.80, 12.79, 15.52, 18.65, 13.21, 13.91, 8.16, 4.81, 4.59, 2.23)
+data$timepoints = c(0.083, 0.167, 0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8)
+data$N = length(data$timepoints)
+data$u0 = c(1200,0, 0)
+data$t0 = 0
+data$holdout_t = array(0.75, dim = 1)
+data$holdout_y = array(9.98, dim = 1)
+
+stanfile = "models/holdout_peri_pharmacokinetic.stan" 
+
+holdoutperifit = stan(file = stanfile,
+               data = data, seed = 5838299,
+               chains = 4, cores = 4,
+               iter = 2000,
+               verbose = TRUE,
+               pars = c("u"),
+               include = FALSE )
+saveRDS(holdoutperifit, "modelfits/holdoutperifit.rds")
+```
+
+```{r, echo = FALSE}
+holdoutperifit = readRDS("modelfits/holdoutperifit.rds")
+holdoutperi_loglik = rstan::extract(holdoutperifit, pars = c("holdout_log_lik"))$holdout_log_lik
+elpd_exact_peri = logSumExp(holdoutperi_loglik) - log(length(holdoutperi_loglik))
+
+```
+If we repeat the same steps for the model including the peripheral compartment, we arrive at `elpd_loo` = `r round(sum(elpd_exact_peri, loo_peri$pointwise[-5,"elpd_loo"]), 3)`. (I note that these are identical to the PSIS estimated values, so it would seem that the high Pareto K value did not impact the `elpd` estimate for y[5] too substantially.)
+
+```{r, echo = FALSE}
+elpd_diff = c(elpd_exact_peri, loo_peri$pointwise[-5,"elpd_loo"]) - 
+        c(elpd_exact, loo_simple$pointwise[-5,"elpd_loo"])
+elpd_diff_SE = sqrt(12*var(elpd_diff))
+```
+Finally we can compute that `elpd_diff` = `r round(sum(elpd_diff), 3)` with standard error `r round(elpd_diff_SE, 3)`.
+
+So that was a whole lot of work to show that the models have basically similar predictive power; the more complex model has a slightly better `elpd_loo`, but because this difference is smaller than the standard error on the estimates, we could either report both models and their respective weights, or just the simpler (more parsimonious) model---at least this is what I tend to see in the biological literature. However, I'm curious to know what a proper statistician's perspective would be...?
+
+
+# Exercise 2 
+
+As a disclaimer, the sampler diagnostic checks for parts (b-d) look quite bad. Despite many attempts at debugging, I don't see any errors in my sampler code (maybe I've missed some). I suspect this is an issues with the values for `eps`, `L`, the small number of iterations, and the way they interact with the target distribution. Increasing any of these parameters singly or in combination rescues the behaviour, as seen in parts (e-f). Similarly, if I replace your covariance matrix with a 5x5 identity matrix, the diagnostics are considerably improved (although not perfect). Maybe this was the intention of the question (to show that some `L` produce pathogenic chains, even for a seemingly simple target), but you seemed to suggest in office hours that it should work. 
+
+Anyways, I was unhappy with the diagnostics and wanted to verify that the issue was not elsewhere in my code (e.g., incorrectly computing the summary statistics), so I present all of the diagnostics for a sampler using `L` = 80 as well. These can be found at the end of the question.
+
+### a) Write a function to run "static" HMC 
+
+Because we are working here with Gaussian distributions, it's possible to derive an analytical solution for `grad_log_p`. Starting from the log probability density for a multivariate Gaussian:
+
+$log(\pi) = -\frac{k}{2}log(2\pi) - \frac{1}{2}log(|\Sigma|)) - \frac{1}{2}(x - \mu)^T\Sigma^{-1}(x - \mu)$
+
+$\frac{d}{dx}log(\pi) = -\Sigma^{-1}(x - \mu)$
+
+The log density functions I will supply to the sampler are effectively just wrapper functions on `dnorm` (base R) and `dmvnorm` from the package `mvtnorm`:
+
+```{r}
+standard_gradient = function(x0){ 
+  grad = -x0
+  return(grad)
+  
+}
+
+standard_lpdf = function(x0){
+  return(dnorm(x0, 0, 1, log = TRUE))
+}
+
+multivariate_gradient = function(x0, # length k vector -- where are we?
+                             mu = rep(0,5),
+                             sigma = matrix(c(2.82, 2.71, 0.18, 2.42, -1.87,
+                                              2.71, 7.35,-4.02,-1.17,-1.05,
+                                              0.18,-4.02,8.85,1.64,3.81,
+                                              2.42,-1.17,1.64,5.94,-3.95,
+                                              -1.87,-1.05,3.81,-3.95,6.5), nrow = 5, ncol = 5)
+                             ){ 
+  grad = as.numeric(-solve(sigma) %*% (x0-mu))
+  return(grad)
+  
+}
+
+multivariate_lpdf = function(x0,
+                         mu = rep(0,5),
+                             sigma = matrix(c(2.82, 2.71, 0.18, 2.42, -1.87,
+                                              2.71, 7.35,-4.02,-1.17,-1.05,
+                                              0.18,-4.02,8.85,1.64,3.81,
+                                              2.42,-1.17,1.64,5.94,-3.95,
+                                              -1.87,-1.05,3.81,-3.95,6.5), nrow = 5, ncol = 5)
+){
+  return(dmvnorm(x0, mu, sigma, log = TRUE))
+}
+
+```
+
+Then we can commence with writing the HMC sampler itself! I am looking here to the code from Neal (2011); frankly this feels like cheating because the code is basically already written??
+
+```{r}
+HMC = function(log_p,
+               grad_log_p,
+               theta0,
+               n_iter,
+               eps,
+               L){
+  q = theta0
+  draws = matrix(NA, nrow = n_iter, ncol = length(theta0))
+  numgrad = numeric(n_iter)
+  
+  for (n in 1:n_iter){
+  numgrad[n] = 0
+  start_q = q
+  p = rnorm(length(q),0,1)
+  start_p = p
+  
+  ################# Leapfrog ##############################
+  # half step for momentum at the beginning
+  p = p + eps*grad_log_p(q) / 2
+  numgrad[n] = numgrad[n] + 1
+  
+  for (i in 1:L){
+  # full step for position
+    q = q + eps * p
+  # full step for momentum, except at end of trajectory
+    if (i!=L) { 
+      p = p + eps*grad_log_p(q)
+      numgrad[n] = numgrad[n] + 1
+      }
+  }
+  
+  # half step for momentum at the end.
+  p = p + eps*grad_log_p(q) / 2
+  numgrad[n] = numgrad[n] + 1
+  p = -p # for detail balance, not strictly necessary
+  #########################################################
+  
+  
+  ################## Metropolis Acceptance ################
+  # evaluate potential and kinetic energies
+  start_U = -log_p(start_q)
+  start_K = sum(start_p^2) / 2
+  proposed_U = -log_p(q)
+  proposed_K = sum(p^2) / 2
+  
+  # accept or reject the state at end of trajectory
+  if (runif(1) < exp(start_U-proposed_U+start_K-proposed_K)){
+    draws[n,] = q
+    } else{
+      q = start_q
+      draws[n,] = q
+    }
+  #########################################################
+  }
+  return(list(draws, numgrad))
+}
+
+```
+
+I will call this function on a standard normal distribution to test its performance. I'll use `n_iter = 1000`, `eps = 0.1`, `L = 20`, and `theta0 = 10`.
+
+```{r, echo = FALSE}
+
+start = 10
+
+draws = HMC(log_p = standard_lpdf,
+            grad_log_p = standard_gradient,
+            theta0 = start,
+            n_iter = 1000,
+            eps = 0.1,
+            L = 20)[[1]]
+draws = as.data.frame(draws)
+
+```
+
+Discarding the first 500 iterations as warm-up, the Monte Carlo mean estimate is `r round(mean(draws$V1[500:1000]), 3)` and the variance is `r round(var(draws$V1[500:1000]), 3)`.
+Let's check out the traceplot.
+
+```{r, echo = FALSE}
+draws_df = data.frame(iter = 1:1000, draw = draws$V1)
+ggplot(draws_df, aes(x = iter, y = draw)) +
+  geom_line() +
+  theme_bw()
+```
+
+### b) Sampling from a multivariate normal 
+
+In my `log_p` and `grad_log_p` functions, I have assumed that the mean is located at {0, 0, 0, 0, 0}.
+For the stated parameter values (`eps` = 0.05, `L` = 10, 1000 iterations), I run the sampler and compute summary statistics using the package `posterior`:
+
+```{r, echo = FALSE}
+start = rep(5,5)
+
+iterations = 1000
+draws = HMC(log_p = multivariate_lpdf,
+            grad_log_p = multivariate_gradient,
+            theta0 = start,
+            n_iter = iterations,
+            eps = 0.05,
+            L = 10)[[1]]
+
+draws_df = data.frame(draws[(iterations/2):iterations,])
+summary_tibble = summarise_draws(draws_df, "mean", "median", "sd", "quantile2", "mcse_mean")
+knitr::kable(summary_tibble, digits = 3)
+
+
+```
+The mean estimates don't look fantastic, but the confidence bounds at least overlap with 0 for each variable. The MCSE means are fairly substantial in comparison to the posterior standard deviations, which might suggest that we need more iterations to reduce the variance of the estimator.
+
+### c) Convergence diagnostics 
+
+```{r, echo = FALSE}
+draws_list = list()
+sample_list = list()
+
+for (i in 1:4){
+  start = runif(5, -20, 20)
+  iterations = 1000
+  draws = HMC(log_p = multivariate_lpdf,
+            grad_log_p = multivariate_gradient,
+            theta0 = start,
+            n_iter = iterations,
+            eps = 0.05,
+            L = 10)[[1]]
+  draws = as.data.frame(draws)
+  draws$chain = i
+  draws$iteration = 1:iterations
+  draws_list[[i]] = draws
+  sample_list[[i]] = draws[(iterations/2 + 1):iterations,]
+  
+}
+
+samples_df = do.call(rbind, sample_list)
+
+vars = c("V1", "V2", "V3", "V4", "V5")
+metric_df = data.frame(Dimension = vars,
+                       Rhat = NA,
+                       ESS = NA)
+  for(dimension in 1:5){
+    mat = samples_df[,c(dimension, (ncol(samples_df)-1):ncol(samples_df))]
+    colnames(mat) = c("draw", "chain", "iteration")
+    widemat = pivot_wider(mat, names_from = chain, values_from = draw)
+    metric_df$Rhat[metric_df$Dimension == vars[dimension]] = rhat(as.matrix(widemat[,-1]))
+    metric_df$ESS[metric_df$Dimension == vars[dimension]] = ess_bulk(as.matrix(widemat[,-1]))
+  }
+metric_df = as_tibble(metric_df)
+knitr::kable(metric_df, digits = 3)
+```
+
+When we compute $\hat R$ and bulk effective sample size (ESS) using multiple chains, we can see that $\hat R$ is consistently larger than 1.01, indicating that the chains have not mixed well. The effective sample size is quite low in comparison to our number of iterations (2000 sampling iterations total if we combine the four chains). To me this suggests that we are not getting a lot of information per sample, possibly because the chains are highly autocorrelated. This would cause low ESS and could also result in large $\hat R$ if the chains are moving very slowly through the parameter space---by chance, they may not be well mixed unless we sample for a very long time. 
+
+Indeed, if we increase the number of iterations to 10,000, $\hat R$ looks considerably better, although still not perfect:
+
+```{r, echo = FALSE}
+draws_list = list()
+sample_list = list()
+
+for (i in 1:4){
+  start = runif(5, -20, 20)
+  iterations = 10000
+  draws = HMC(log_p = multivariate_lpdf,
+            grad_log_p = multivariate_gradient,
+            theta0 = start,
+            n_iter = iterations,
+            eps = 0.05,
+            L = 10)[[1]]
+  draws = as.data.frame(draws)
+  draws$chain = i
+  draws$iteration = 1:iterations
+  draws_list[[i]] = draws
+  sample_list[[i]] = draws[(iterations/2 + 1):iterations,]
+  
+}
+
+samples_df = do.call(rbind, sample_list)
+
+vars = c("V1", "V2", "V3", "V4", "V5")
+metric_df = data.frame(Dimension = vars,
+                       Rhat = NA,
+                       ESS = NA)
+  for(dimension in 1:5){
+    mat = samples_df[,c(dimension, (ncol(samples_df)-1):ncol(samples_df))]
+    colnames(mat) = c("draw", "chain", "iteration")
+    widemat = pivot_wider(mat, names_from = chain, values_from = draw)
+    metric_df$Rhat[metric_df$Dimension == vars[dimension]] = rhat(as.matrix(widemat[,-1]))
+    metric_df$ESS[metric_df$Dimension == vars[dimension]] = ess_bulk(as.matrix(widemat[,-1]))
+  }
+
+metric_df = as_tibble(metric_df)
+knitr::kable(metric_df, digits = 3)
+```
+
+Looking at the trace plots for 1000 iterations confirms the hypothesis that the chains are badly autocorrelated:
+
+```{r, echo = FALSE, fig.width = 4, fig.height = 8, fig.align='center', out.width="50%"}
+draws_list = list()
+sample_list = list()
+
+for (i in 1:4){
+  start = runif(5, -20, 20)
+  iterations = 1000
+  draws = HMC(log_p = multivariate_lpdf,
+            grad_log_p = multivariate_gradient,
+            theta0 = start,
+            n_iter = iterations,
+            eps = 0.05,
+            L = 10)[[1]]
+  draws = as.data.frame(draws)
+  draws$chain = i
+  draws$iteration = 1:iterations
+  draws_list[[i]] = draws
+  sample_list[[i]] = draws[(iterations/2 + 1):iterations,]
+  
+}
+
+samples_df = do.call(rbind, sample_list)
+draws_df = do.call(rbind, draws_list)
+draws_long = pivot_longer(draws_df, !c(chain, iteration), names_to = "dimension", values_to = "draw")
+draws_long$chain = as.factor(draws_long$chain)
+
+ggplot(draws_long, aes(x = iteration, y = draw, color = chain)) +
+  geom_line() +
+  xlab("Iteration") +
+  ylab("Value") +
+  facet_wrap(~dimension, ncol = 1) +
+  theme_bw()
+
+
+
+```
+
+We can also look at density plots, separated by chain, to see if the chains converge on roughly similar estimates. Below, each columns shows a dimension (V1-V5) and each row shows an MCMC chain (1-4).
+
+```{r, echo = FALSE}
+ggplot(draws_long, aes(x = draw)) +
+  geom_histogram(aes(y = after_stat(density)), binwidth = 1) +
+  ylab("Density") +
+  xlab("Value") +
+  facet_grid(chain~dimension) +
+  theme_bw()
+
+```
+
+The chains seem to have similar central tendency, but the shape of their sampled distributions are not the same. In many cases they don't look particularly Gaussian, which is not surprising given our very small ESS.
+
+
+### d) Squared error of Monte Carlo mean estimates 
+
+
+$MSE_i = \frac{1}{C-1}\sum_{c = 1}^{C}[(\frac{1}{N} \sum_{n = 1}^{N} x_{i,n,c}) - \mu_i]^2$
+
+where $C$ denotes the number of chains and $N$ denotes the sampling (not warmup!) iterations per chain, $i$ denotes the dimension of the target distribution, and $x_{i,n,c}$ denotes the value of the $n_{th}$ sample from the $c_{th}$ chain in the $i_{th}$ dimension.
+
+```{r, echo = FALSE, fig.align='center'}
+mse_df = data.frame(stop_iter = 501:1000,
+                    mse_1 = NA,
+                    mse_2 = NA)
+samples_df$numgradient = NULL
+
+for(stop_iter in (iterations/2 + 1):iterations){
+  partial_samples = samples_df[samples_df$iteration <= stop_iter,]
+  chain_estimates = as.data.frame(partial_samples) %>%
+    group_by(chain) %>%
+    summarize(V1 = mean(V1),
+              V2 = mean(V2))
+  mse_df$mse_1[mse_df$stop_iter == stop_iter] = sum((chain_estimates$V1)^2)/(nrow(chain_estimates)-1)
+  mse_df$mse_2[mse_df$stop_iter == stop_iter] = sum((chain_estimates$V2)^2)/(nrow(chain_estimates)-1)
+}
+
+mse_df$num_samples = mse_df$stop_iter - 500
+
+#plot Var 1
+var1 = ggplot(mse_df, aes(x = num_samples, y = mse_1)) +
+  geom_point() +
+  xlab("Number of sample iterations") +
+  ylab("Squared error of Monte Carlo estimate") +
+  ggtitle("Dimension 1") +
+  theme_bw()
+
+#plot Var 2
+var2 = ggplot(mse_df, aes(x = num_samples, y = mse_2)) +
+  geom_point() +
+  xlab("Number of sample iterations") +
+  ylab("") +
+  ggtitle("Dimension 2") +
+  theme_bw()
+
+grid.arrange(var1, var2, ncol = 2)
+
+```
+
+This value appears to generally decrease, but with oscillatory behaviour. This is likely because the (highly autocorrelated) chains are wandering slowly along their own trajectories, and we have not let them run for long enough to properly mix. When chains move on diverging trajectories the MSE increases, and when they start to move towards eachother again, the MSE decreases.
+
+### e) Optimizing (static) L 
+
+If we maintain a stepsize of $\epsilon = 0.05$, $L^* \approx 149$ for this target distribution ($max(\Sigma_{ii}) = 8.85$) When running my sampler with $L = L^*$, I received a warning from the function `ess_bulk` in the package `posterior`: `Warning: The ESS has been capped to avoid unstable estimates.` I checked the Stan forums and found that this can be a sign of "antithetic sampling," which I interpret as "the samples are very negatively autocorrelated." While this can improve the central qualities of the estimator, I also read that it can reduce the tail effective sample size. I have therefore reported both bulk and tail effective sample sizes below.
+```{r, echo = FALSE, warning=FALSE}
+Ls = c(10, 80, 149)
+vars = c("V1", "V2", "V3", "V4", "V5")
+metric_df = expand.grid(Dimension = vars, L = Ls)
+metric_df$Rhat = NA
+metric_df$ESS_Bulk = NA
+metric_df$ESS_Bulk_Per_Grad = NA
+metric_df$ESS_Tail = NA
+
+for (l in 1:3){
+  sample_list = list()
+  grad_list = list()
+  for (i in 1:4){
+    start = runif(5, -20, 20)
+    iterations = 1000
+    draws = HMC(log_p = multivariate_lpdf,
+              grad_log_p = multivariate_gradient,
+              theta0 = start,
+              n_iter = iterations,
+              eps = 0.05,
+              L = Ls[l])
+    draws_df = as.data.frame(draws[[1]])
+    draws_df$chain = i
+    draws_df$iteration = 1:iterations
+    sample_list[[i]] = draws_df[(iterations/2 + 1):iterations,]
+    grad_list[[i]] = draws[[2]]
+  }
+  
+  samples_df = do.call(rbind, sample_list)
+  total_gradient = sum(unlist(grad_list))
+  for(dimension in 1:5){
+    mat = samples_df[,c(dimension, (ncol(samples_df)-1):ncol(samples_df))]
+    colnames(mat) = c("draw", "chain", "iteration")
+    widemat = pivot_wider(mat, names_from = chain, values_from = draw)
+    metric_df$Rhat[metric_df$Dimension == vars[dimension] & metric_df$L == Ls[l]] = posterior::rhat(as.matrix(widemat[,-1]))
+    metric_df$ESS_Bulk[metric_df$Dimension == vars[dimension] & metric_df$L == Ls[l]] = posterior::ess_bulk(as.matrix(widemat[,-1]))
+    metric_df$ESS_Tail[metric_df$Dimension == vars[dimension] & metric_df$L == Ls[l]] = posterior::ess_tail(as.matrix(widemat[,-1]))
+    metric_df$ESS_Bulk_Per_Grad[metric_df$Dimension == vars[dimension] & metric_df$L == Ls[l]] = posterior::ess_bulk(as.matrix(widemat[,-1]))/total_gradient
+  }
+}
+
+metric_df = as_tibble(metric_df)
+knitr::kable(metric_df, digits = 4)
+
+```
+
+Indeed we can see that for two of the dimensions (V1 and V2), the "optimized" $L^*$ results in lower values of `ESS_Tail` and $\hat R \geq 1.01$ (note that V1 is always bad, V2 is only bad for some runs--so when I knit this markdown document you may see fine diagnostics for V2). 
+
+The Stan forum post suggested either running for more iterations (antitheticity tends to occur more frequently on short chains?) or capping the `max_treedepth` (not applicable for this sampler).
+
+If I double the number of iterations (N = 2000), the same warning arises and $\hat R$ is still borderline:
+
+```{r, echo = FALSE, warning=FALSE}
+Ls = c(149)
+vars = c("V1", "V2", "V3", "V4", "V5")
+metric_df = expand.grid(Dimension = vars, L = Ls)
+metric_df$Rhat = NA
+metric_df$ESS_Bulk = NA
+metric_df$ESS_Bulk_Per_Grad = NA
+metric_df$ESS_Tail = NA
+
+for (l in 1){
+  sample_list = list()
+  grad_list=list()
+  for (i in 1:4){
+    start = runif(5, -20, 20)
+    iterations = 2000
+    draws = HMC(log_p = multivariate_lpdf,
+              grad_log_p = multivariate_gradient,
+              theta0 = start,
+              n_iter = iterations,
+              eps = 0.05,
+              L = Ls[l])
+    draws_df = as.data.frame(draws[[1]])
+    draws_df$chain = i
+    draws_df$iteration = 1:iterations
+    sample_list[[i]] = draws_df[(iterations/2 + 1):iterations,]
+    grad_list[[i]] = draws[[2]]
+  }
+  
+  samples_df = do.call(rbind, sample_list)
+  total_gradient = sum(unlist(grad_list))
+  for(dimension in 1:5){
+    mat = samples_df[,c(dimension, (ncol(samples_df)-1):ncol(samples_df))]
+    colnames(mat) = c("draw", "chain", "iteration")
+    widemat = pivot_wider(mat, names_from = chain, values_from = draw)
+    metric_df$Rhat[metric_df$Dimension == vars[dimension] & metric_df$L == Ls[l]] = posterior::rhat(as.matrix(widemat[,-1]))
+    metric_df$ESS_Bulk[metric_df$Dimension == vars[dimension] & metric_df$L == Ls[l]] = posterior::ess_bulk(as.matrix(widemat[,-1]))
+    metric_df$ESS_Tail[metric_df$Dimension == vars[dimension] & metric_df$L == Ls[l]] = posterior::ess_tail(as.matrix(widemat[,-1]))
+    metric_df$ESS_Bulk_Per_Grad[metric_df$Dimension == vars[dimension] & metric_df$L == Ls[l]] = posterior::ess_bulk(as.matrix(widemat[,-1]))/total_gradient
+  }
+}
+metric_df = as_tibble(metric_df)
+knitr::kable(metric_df, digits = 4)
+```
+
+While we can't adapt `max_treedepth` here, that is effectively the NUTS workaround for controlling/capping `L`, which suggests to me that this `L` value may also not be optimal (or my sampler is totally dysfunctional, since this is supposed to be the optimal value...yikes).
+
+### f) A new HMC function for jittering L per iteration 
+
+```{r}
+HMC_jitter = function(log_p,
+               grad_log_p,
+               theta0,
+               n_iter,
+               eps,
+               Lmax){
+  q = theta0
+  draws = matrix(NA, nrow = n_iter, ncol = length(theta0))
+  numgrad = numeric(n_iter)
+  
+  for (n in 1:n_iter){
+  L = sample(1:Lmax, 1)
+  numgrad[n] = 0
+  start_q = q
+  p = rnorm(length(q),0,1)
+  start_p = p
+  
+  ################# Leapfrog ##############################
+  # half step for momentum at the beginning
+  p = p + eps*grad_log_p(q) / 2
+  numgrad[n] = numgrad[n] + 1
+  
+  for (i in 1:L){
+  # full step for position
+    q = q + eps * p
+  # full step for momentum, except at end of trajectory
+    if (i!=L) { 
+      p = p + eps*grad_log_p(q)
+      numgrad[n] = numgrad[n] + 1
+      }
+  }
+  
+  # half step for momentum at the end.
+  p = p + eps*grad_log_p(q) / 2
+  numgrad[n] = numgrad[n] + 1
+  p = -p # for detail balance, not strictly necessary
+  #########################################################
+  
+  ################## Metropolis Acceptance ################
+  # evaluate potential and kinetic energies
+  start_U = -log_p(start_q)
+  start_K = sum(start_p^2) / 2
+  proposed_U = -log_p(q)
+  proposed_K = sum(p^2) / 2
+  
+  # accept or reject the state at end of trajectory
+  if (runif(1) < exp(start_U-proposed_U+start_K-proposed_K)){
+    draws[n,1:length(q)] = q
+    } else{
+      q = start_q
+      draws[n,1:length(q)] = q
+    }
+  #########################################################
+  }
+  return(list(draws, numgrad))
+}
+
+```
+
+Using the updated function and $L_{max} = L^*$ I return the following summary statistics:
+
+```{r, echo = FALSE}
+sample_list = list()
+grad_list = list()
+
+for (i in 1:4){
+  start = runif(5, -20, 20)
+  iterations = 1000
+  draws = HMC_jitter(log_p = multivariate_lpdf,
+            grad_log_p = multivariate_gradient,
+            theta0 = start,
+            n_iter = iterations,
+            eps = 0.05,
+            Lmax = 149)
+  draws_df = as.data.frame(draws[[1]])
+  draws_df$chain = i
+  draws_df$iteration = 1:iterations
+  
+  sample_list[[i]] = draws_df[(iterations/2 + 1):iterations,]
+  grad_list[[i]] = draws[[2]]
+}
+
+samples_df = do.call(rbind, sample_list)
+total_gradient = sum(unlist(grad_list))
+
+vars = c("V1", "V2", "V3", "V4", "V5")
+metric_df = data.frame(Dimension = vars,
+                       Rhat = NA,
+                       ESS_Per_Iter = NA)
+for(dimension in 1:5){
+  mat = samples_df[,c(dimension, (ncol(samples_df)-1):ncol(samples_df))]
+  colnames(mat) = c("draw", "chain", "iteration")
+  widemat = pivot_wider(mat, names_from = chain, values_from = draw)
+  metric_df$Rhat[metric_df$Dimension == vars[dimension]] = rhat(as.matrix(widemat[,-1]))
+  metric_df$ESS_Per_Iter[metric_df$Dimension == vars[dimension]] = ess_bulk(as.matrix(widemat[,-1]))/total_gradient
+}
+
+metric_df = as_tibble(metric_df)
+knitr::kable(metric_df, digits = 3)
+
+```
+
+Here the issues with antitheticity are resolved, supporting the use of a jittering the value of `L`. We can see however, that the bulk ESS per gradient evaluation is lower than for $L = L^*$. Perhaps a nice compromise would be to jitter L for values {$\frac{L^*}{2}...L^*$} to avoid very small values of $L$.
+
+### Full diagnostics for L = 80, eps = 0.05, iterations = 1000 (without jittering) 
+```{r full diagnostics, echo=FALSE, fig.height=8, fig.width=4, fig.align='center', out.width="50%"}
+
+# with a single chain
+start = rep(5,5)
+iterations = 1000
+draws = HMC(log_p = multivariate_lpdf,
+            grad_log_p = multivariate_gradient,
+            theta0 = start,
+            n_iter = iterations,
+            eps = 0.05,
+            L = 80)
+
+draws_df = data.frame(draws[[1]])
+samples_df = draws_df[(iterations/2):iterations,]
+summary_tibble = summarise_draws(draws_df, "mean", "median", "sd", "quantile2", "mcse_mean")
+knitr::kable(summary_tibble, digits = 3)
+
+# multiple chains to check convergence
+draws_list = list()
+sample_list = list()
+for (i in 1:4){
+  start = runif(5, -20, 20)
+  iterations = 1000
+  draws = HMC(log_p = multivariate_lpdf,
+            grad_log_p = multivariate_gradient,
+            theta0 = start,
+            n_iter = iterations,
+            eps = 0.05,
+            L = 80)[[1]]
+  draws = as.data.frame(draws)
+  draws$chain = i
+  draws$iteration = 1:iterations
+  draws_list[[i]] = draws
+  sample_list[[i]] = draws[(iterations/2 + 1):iterations,]
+  
+}
+
+samples_df = do.call(rbind, sample_list)
+draws_df = do.call(rbind, draws_list)
+
+# check Rhat and ESS
+vars = c("V1", "V2", "V3", "V4", "V5")
+metric_df = data.frame(Dimension = vars,
+                       Rhat = NA,
+                       ESS = NA)
+  for(dimension in 1:5){
+    mat = samples_df[,c(dimension, (ncol(samples_df)-1):ncol(samples_df))]
+    colnames(mat) = c("draw", "chain", "iteration")
+    widemat = pivot_wider(mat, names_from = chain, values_from = draw)
+    metric_df$Rhat[metric_df$Dimension == vars[dimension]] = rhat(as.matrix(widemat[,-1]))
+    metric_df$ESS[metric_df$Dimension == vars[dimension]] = ess_bulk(as.matrix(widemat[,-1]))
+  }
+metric_df = as_tibble(metric_df)
+knitr::kable(metric_df, digits = 3)
+
+# Look at traceplot
+draws_long = pivot_longer(draws_df, !c(chain, iteration), names_to = "dimension", values_to = "draw")
+draws_long$chain = as.factor(draws_long$chain)
+ggplot(draws_long, aes(x = iteration, y = draw, color = chain)) +
+  geom_line() +
+  xlab("Iteration") +
+  ylab("Value") +
+  facet_wrap(~dimension, ncol = 1) +
+  theme_bw()
+```
+
+```{r echo=FALSE, fig.height=4.5, fig.width=6, fig.align='center'}
+# Look at density plot
+ggplot(draws_long, aes(x = draw)) +
+  geom_histogram(aes(y = after_stat(density)), binwidth = 1) +
+  ylab("Density") +
+  xlab("Value") +
+  facet_grid(chain~dimension) +
+  theme_bw()
+```
+```{r, echo=FALSE, fig.height=3, fig.width=6, fig.align='center'}
+# compute MSE
+mse_df = data.frame(stop_iter = 501:1000,
+                    mse_1 = NA,
+                    mse_2 = NA)
+
+for(stop_iter in (iterations/2 + 1):iterations){
+  partial_samples = samples_df[samples_df$iteration <= stop_iter,]
+  chain_estimates = as.data.frame(partial_samples) %>%
+    group_by(chain) %>%
+    summarize(V1 = mean(V1),
+              V2 = mean(V2))
+  mse_df$mse_1[mse_df$stop_iter == stop_iter] = sum((chain_estimates$V1)^2)/(nrow(chain_estimates)-1)
+  mse_df$mse_2[mse_df$stop_iter == stop_iter] = sum((chain_estimates$V2)^2)/(nrow(chain_estimates)-1)
+}
+
+mse_df$num_samples = mse_df$stop_iter - 500
+
+#plot Var 1
+var1 = ggplot(mse_df, aes(x = num_samples, y = mse_1)) +
+  geom_point() +
+  xlab("Number of samples") +
+  ylab("Squared error of Monte Carlo estimate") +
+  ggtitle("Dimension 1") +
+  theme_bw()
+
+#plot Var 2
+var2 = ggplot(mse_df, aes(x = num_samples, y = mse_2)) +
+  geom_point() +
+  xlab("Number of samples") +
+  ylab("") +
+  ggtitle("Dimension 2") +
+  theme_bw()
+
+grid.arrange(var1, var2, ncol = 2)
+
+
+```
+
+
+# Exercise 3
+
+### a) Show that $KL(q||p) ≥ 0$ and $KL(q||p) = 0$ if and only if $p = q$ 
+
+Let $KL(q||p) = \int (log(q(z)) - log(p(z))) q(z) dz$
+
+Jensen's inequality for concave functions states that $f(\mathbb{E}(x)) \geq \mathbb{E}(f(x))$. We can therefore see that 
+
+$\int q(z) log(\frac{p(z)}{q(z)})dz \leq log(\int q(z) \frac{p(z)}{q(z)}dz) = log(1) = 0$
+
+Flipping the terms in the logarithm of the first integral gives
+
+$- \int q(z) log(\frac{q(z)}{p(z)})dz \leq 0$
+
+which is equivalent to 
+
+$KL(q||p) = \int q(z) log(\frac{q(z)}{p(z)})dz \geq 0$
+
+For Jensen's inequality, equality is only achieved when x (from the term $f(\mathbb{E}(x)) \geq \mathbb{E}(f(x))$) is constant "almost everywhere." I believe this is because in the continuous case, we can change a single point in the probability density function but it will contribute "measure 0" to the probability---you mentioned this in lecture, I think. Having not taken coursework in measure theory this seems like a fuzzy rule to me...if we have an infinite number of points on the line, couldn't we then change the pdf at a smaller infinity of those points and still arrive at the same conclusion, since each point contributes "measure 0"? But I digress. The point is that we want $x = c$, where $c$ is some constant. In this case, that means $\frac{p(z)}{q(z)} = c$, from which we can say
+
+$\int p(z) dz = \int c q(z) dz$
+
+Since both $p(z)$ and $q(z)$ are probability density functions, they integrate to 1, yielding $c = 1$. So we achieve equality ($KL(q||p) = 0$) if and only if $p(z) = q(z)$.
+
+
+### b) KL for multivariate Gaussians 
+
+First, we can rewrite $KL(q||p)$ as $KL(q||p) = \mathbb{E}_q (log(q(z)) - log(p(z))$. 
+For $p$, a d-dimensional Gaussian with mean $\mu$ and non-diagonal covariance matrix $\Sigma$, and $q$, a d-dimensional Gaussian with mean $\nu$ and diagonal covariance matrix $\psi$, we can substitute the logarithm of the probability density function for a multivariate Gaussian and arrive at:
+
+$KL(q||p) = \mathbb{E}_q (-\frac{1}{2}log(|\psi|) + \frac{1}{2}log(|\Sigma|) - \frac{1}{2}(x-\nu)^T\psi^{-1}(x-\nu) + \frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu))$
+
+A convenient trick (thanks, Google!) is that $\mathbb{E}_q((x-a)^TA(x-a)) = tr(\psi A) + (\nu-a)^TA(\nu-a)$. 
+
+For the term ($\frac{1}{2}(x-\nu)^T\psi^{-1}(x-\nu)$) this simplifies to $tr(\psi \psi^{-1}) + (\nu-\nu)^T\psi^{-1}(\nu-\nu) = tr(\mathbf{I}) = d$ (for a d-dimensional identity matrix).
+
+For the term $\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)$, this becomes $tr(\psi \Sigma^{-1}) + (\nu-\mu)^T \Sigma^{-1} (\nu - \mu)$, where $tr(A) = \sum_{i=1}^{d} A_{ii}$.
+
+Together this yields 
+
+$KL(q||p) = \frac{1}{2}log(|\Sigma|) + d -\frac{1}{2}log(|\psi|) + (\nu-\mu)^T \Sigma^{-1} (\nu - \mu) + \sum_{i=1}^{d} (\Sigma^{-1})_{ii} \psi_{ii}$
+
+The first two terms can be combined into a constant, $K$, which does not depend on $\nu$ or $\psi$. The final form is:
+
+$KL(q||p) = K -\frac{1}{2}log(|\psi|) + (\nu-\mu)^T \Sigma^{-1} (\nu - \mu) + \sum_{i=1}^{d} (\Sigma^{-1})_{ii} \psi_{ii}$
+
+(As discussed previously, the sign on $\frac{1}{2}log(|\psi|)$ should be negative, and I believe you may have also dropped the inverse on $\Sigma$ in the middle term.)
+
+
+### c) Show that the variational parameters which minimize $KL(q||p)$ are $\nu = \mu$ and $\psi_{ii} = \frac{1}{(\Sigma^{-1})_{ii}}$ 
+
+To show this we can take the gradient of $KL(q||p)$ with respect to $\nu$ and $\psi$, set these equal to 0, and solve for $\nu$ or $\psi$. We can then show that the second order gradient is positive to verify that the critical points are minima.
+
+For the gradient with respect to $\nu$, the term we care about is $(\nu-\mu)^T \Sigma^{-1} (\nu - \mu)$. We can take the gradient using the product rule. In full disclosure I hadn't the faintest idea how to do this, but [Stack Exchange](https://math.stackexchange.com/questions/222894/how-to-take-the-gradient-of-the-quadratic-form#:~:text=For%20x∈Rn,(AT+A)x) came to the rescue. I'll write out the product rule bit below, but the punchline is that for $f = x^TAx$,  $\nabla f = (A^T+A)x$.
+
+To arrive at this rule, let $g(x) = x^T$, $h(x) = Ax$, and $f(x) = g(x)h(x)$. Then by product rule,
+
+$df(x) = dg(x)h(x) + g(x)dh(x)$
+
+where $dg(x) = d(x^T) = (dx)^T$ and $dh(x) = Adx$. Substituting, we get
+
+$df(x) = (dx)^TAx + x^TAdx$
+
+Evidently, $(dx)^TAx = x^TA^Tdx$ (I lack intuition for this but can convince myself that it's true for a 2x2 matrix), so:
+
+$df = x^TA^Tdx + x^TAdx = x^T(A^T + A)dx$
+
+By definition, $df = (\nabla f)^T$ so $\nabla f = (A^T + A)x$
+
+
+With this trick in hand, we can go on to take the gradient wrt $\nu$. If 
+
+$f(\nu) = (\nu-\mu)^T \Sigma^{-1} (\nu - \mu)$ 
+
+then 
+
+$\nabla f_v = \frac{1}{2}((\Sigma^{-1})^T + \Sigma^{-1})(\nu-\mu)$ 
+
+which simplifies to $(\Sigma^{-1})(\nu-\mu)$ because $\Sigma^{-1}$ is symmetrical. 
+
+Because $\Sigma^{-1}$ is positive-definite, the gradient will only be equal to 0 when $\nu = \mu$. We can check that this is a minima by computing the second order gradient of the expression ($\nabla^2 f_v = \Sigma^{-1}$). According to Google this is also called the ``Hessian" matrix (another word which I could perhaps have defined in 2017, but deleted from my brain to make space for bumblebee facts...). Because it is positive definite, the function has positive curvature everywhere. This means $\nu = \mu$ is a minimum.
+
+
+Now, we can turn our attention to $\psi$, which is (much to my relief) a bit simpler to work with. The terms we care about are:
+
+$-\frac{1}{2}log(|\psi|) + \sum_{i=1}^{d} (\Sigma^{-1})_{ii} \psi_{ii}$
+
+which are equivalent to:
+
+$-\frac{1}{2}log(\Pi_{i = 1}^{d}\psi_{ii}) + \sum_{i=1}^{d} (\Sigma^{-1})_{ii} \psi_{ii}$
+
+= $-\frac{1}{2}\sum_{i=1}^{d}log(\psi_{ii}) + \sum_{i=1}^{d} (\Sigma^{-1})_{ii} \psi_{ii}$
+
+For each $\psi_{ii}$, 
+
+$\frac{\delta f}{\delta \psi_{ii}} = -\frac{1}{2}(\frac{1}{\psi_{ii}}) + \frac{1}{2}(\Sigma^{-1})_{ii} = \frac{1}{2}((\Sigma^{-1})_{ii} - \frac{1}{\psi_{ii}})$
+
+which is equal to 0 when $\psi_{ii} = \frac{1}{(\Sigma^{-1})_{ii}}$.
+
+The second derivative $\frac{\delta^2 f}{\delta \psi_{ii}} = \frac{1}{\psi_{ii}}$, which is always positive, indicating that $\psi_{ii} = \frac{1}{(\Sigma^{-1})_{ii}}$ is also a minimum.
+
+### d) VI underestimates the variance of p 
+
+To show that $Var(z_i | z_{-i}) = \frac{1}{(\Sigma^{-1})_{ii}}$ we will start from:
+
+$log(p(z)) = K - \frac{1}{2}(z-\mu)^T \Sigma^{-1} (z - \mu)$
+
+We know also that 
+
+$log(p(z_i | z_{-i})) = K - \frac{1}{2}\frac{(z_i- f(z_{-i}))^2}{Var(z_i | z_{-i})} = K - \frac{1}{2}\frac{z_i^2}{Var(z_i | z_{-i})} + \frac{f^2(z_{-i})}{Var(z_i | z_{-i})} - \frac{2z_if(z_{-i})}{Var(z_i | z_{-i})}$
+
+Therefore, if we can expand $log(p(z_i | z_{-i}))$ and isolate the *only* term containing $z_i^2$, we will know immediately that the coefficient on this term is equal to $-\frac{1}{2Var(z_i | z_{-i})}$
+
+To expand $log(p(z_i | z_{-i}))$, we recall that $p(z) = p(z_i | z_{-i})p(z_{-i})$, or equivalently, $log(p(z)) = log(p(z_i|z_{-1})) + log(p(z_{-i}))$).
+
+Returning to 
+
+$log(p(z)) = K - \frac{1}{2}(z-\mu)^T \Sigma^{-1} (z - \mu)$
+
+For now, let's set aside the $-\frac{1}{2}$. We can expand the expression by considering that $(z-\mu)^T$ is a 1xn vector (call it $u^T$) and $\Sigma^{-1} (z - \mu)$ is an nx1 vector (call it $\nu$, with indices $k$).
+
+$\nu_k = \sum_j (\Sigma)^{-1}_{kj}(z_j - \mu_j)$
+
+Then:
+
+$u^T\nu = \sum_k u_k \nu_k = \sum_k (z_k-\mu_k) \sum_j (\Sigma)^{-1}_{kj}(z_j - \mu_j)$
+
+The is evident that the term we are looking for (containing $z_i^2$) will only be achieved when $k = i$ and $j = i$. Setting these values gives us:
+
+$(z_i - \mu_i)^2(\Sigma)^{-1}_{ii}$)
+
+such that the coefficient on the $z_i^2$ term will be $(\Sigma)^{-1}_{ii}$. Recall that we set aside a $-\frac{1}{2}$ earlier. Reintroducing it, we achieve:
+
+$-\frac{1}{2Var(z_i | z_{-i})} = -\frac{1}{2}(\Sigma)^{-1}_{ii}$
+
+or more simply, $Var(z_i | z_{-i}) = \frac{1}{(\Sigma)^{-1}_{ii}}$
+
+
+Next, we want to show that $\psi_{ii} \leq \Sigma_{ii}$. From part (c), we know that the VI estimate for $\psi_{ii}$ which minimizes the KL divergence is $\psi_{ii} = \frac{1}{(\Sigma^{-1})_{ii}}$.
+
+The law of total variance tells us that:
+
+$Var(z_i) = \mathbb{E}[Var(z_i | z_{-i})] + Var(\mathbb{E}[z_i | z_{-i}])$
+
+We have just computed the first term, namely:
+
+$Var(z_i) = \frac{1}{(\Sigma)^{-1}_{ii}} + Var(\mathbb{E}[z_i | z_{-i}])$
+
+The second term will always be $\geq 0$, as it is a variance. 
+
+But of course, $\frac{1}{(\Sigma)^{-1}_{ii}} = \psi_{ii}$ and $Var(z_i) = \Sigma_{ii}$, so:
+
+$\Sigma_{ii} = \psi_{ii} + Var(\mathbb{E}[z_i | z_{-i}])$
+
+This means that $\Sigma_{ii} > \psi_{ii}$ *except* in the case where $\Sigma$ is a diagonal matrix, in which case $\mathbb{E}[z_i | z_{-i}]$ is a constant (e.g., $z_{-i}$ gives us no information about $z_i$) and the full term $Var(\mathbb{E}[z_i | z_{-i}])$ goes to 0 (leaving $\Sigma_{ii} = \psi_{ii}$).
+
+When $\Sigma$ is not a diagonal matrix, then at least one value $\Sigma_{ij}$ must be nonzero. In this case, $Var(\mathbb{E}[z_i | z_j]) > 0$, and likewise $Var(\mathbb{E}[z_j | z_i]) > 0$, meaning that both $\Sigma_{ii} > \psi_{ii}$ and $\Sigma_{jj} > \psi_{jj}$.
+
+
+\textbf{GenAI Use Statement}: I did not use AI to generate the code or writing in this assignment. However, I did use it to walk me through several computations/derivations, particularly for Exercise 3. At this point I could explain those derivations (possibly without looking at my notes...?) but admittedly this method did not grant me a full understanding of all of the theory. Most likely, nothing short of an entire undergraduate degree's worth of mathematics courses would grant me that understanding, and I simply could not achieve that in two weeks (sorry!).

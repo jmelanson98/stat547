@@ -1,0 +1,61 @@
+\documentclass[12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{plain}                                                      %%
+%%%%%%%%%% EXACT 1in MARGINS %%%%%%%                                   %%
+\setlength{\textwidth}{6.5in}     %%                                   %%
+\setlength{\oddsidemargin}{0in}   %% (It is recommended that you       %%
+\setlength{\evensidemargin}{0in}  %%  not change these parameters,     %%
+\setlength{\textheight}{8.5in}    %%  at the risk of having your       %%
+\setlength{\topmargin}{0in}       %%  proposal dismissed on the basis  %%
+\setlength{\headheight}{0in}      %%  of incorrect formatting!!!)      %%
+\setlength{\headsep}{0in}         %%                                   %%
+\setlength{\footskip}{0in}       %%                                   %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                                   %%
+\newcommand{\required}[1]{\section*{\hfil #1\hfil}}                    %%
+\renewcommand{\refname}{\hfil References Cited\hfil}                                      %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%PUT YOUR MACROS HERE
+\usepackage[backend=biber,style=authoryear,sorting=none]{biblatex}
+\addbibresource{phd_bombus.bib}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{sectsty}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\sectionfont{\normalsize\bfseries}
+
+\pagestyle{empty}
+
+
+
+\begin{document}
+\setcounter{page}{1}
+\begin{center}
+\large
+\textbf{STAT 547: Final Project Proposal} \\
+\normalsize
+Jenna Melanson
+\end{center}
+
+\textbf{Background} \\
+Global food security is highly dependent on the conservation of animal pollinators in landscapes managed for food production \parencite{kleinImportancePollinatorsChanging2006, eilersContributionPollinatorMediatedCrops2011a}. Agricultural intensification is a multi-facted process which can involve expansion of monoculture crop systems, reduction of non-crop habitat, and removal or replacement of native vegetation \parencite{emmersonChapterTwoHow2016}, resulting in reduced or altered patterns of resource availability for pollinators.
+ 
+ For central-place foragers like bumblebees, the availability and spatial distribution of floral resources in close proximity to established nest sites is key for supporting colony growth and reproduction. In response to changing resource distributions, foragers can maximize their rate of energy intake by altering behaviours such as foraging distance and patch attraction/staying time \parencite{charnovOptimalForagingMarginal1976}. While these processes have been studied at small scales \parencite{pykeOptimalForagingBumblebees1979,pykeOptimalForagingBumblebees1980} and in single species \parencite{popeSeasonalFoodScarcity2018,jhaResourceDiversityLandscapelevel2013}, theoretical models suggest that variation in traits linked to foraging scale and patch attractiveness may disproportionately favour some ``winner" species in structurally simple landscapes \parencite{bolinScaledependentForagingTradeoff2018}. 
+ 
+ Using a spatial genetic mark-recapture dataset (i.e., repeated observations of bumblebee colonymates at a set of discrete trapping locations), I aim to investigate differences in foraging scale, local floral-patch attractiveness, and their interaction with landscape-scale resource availability, for two bumblebee species (\emph{Bombus mixtus} and \emph{B. impatiens}). In our study region, \emph{B. mixtus} is a common native species with stable population size, while \emph{B. impatiens} is a non-native species with a rapidly expanding population \parencite{looneyExpandingPacificNorthwest2019a,averillParasitePrevalenceMay2021} thought to be particularly well-adapted to human-modified landscapes \parencite{grattonLocalHabitatType2023}.
+ 
+ To perform these analyses, I will develop and assess the performance of spatially-explicit models in Stan \parencite{carpenterStanProbabilisticProgramming2017}, building from models presented in \textcite{popeInferringForagingRanges2017, popeSeasonalFoodScarcity2018}. My previous work suggests that the data carry more information regarding \emph{relative} foraging distance than \emph{absolute} foraging distance, and that informative priors (or penalization) must be applied to constrain the scale of foraging to biologically realistic values. In the two weeks remaining in the course, I aim to: %My methodology for achieving this penalization is poorly tested; currently the choice of constraint is based entirely on prior knowledge, but model-data agreement may differ between choices of maximum foraging scale. Furthermore, the data span a large range of Julian dates across two years---a time period over which local-scale resource quality can vary dramatically due to plant phenology or anthropogenic disturbance. To enable full use of the floral survey data and meet the aim of assessing patch attractiveness, I will adapt the model to update the target likelihood for each colony at each timepoint, excluding timepoints when a colony was not observed. \textcite{popeSeasonalFoodScarcity2018} provide some basis for such a model, but their observations of each colony are relegated to a single timepoint (early season or late season), simplifying their model. Finally, I will perform comparisons between simplified and complex models, and develop interpretable metrics to communicate results.
+
+\begin{enumerate}
+\item Use posterior predictive checks and leave-one-out cross-validation to assess the performance of models specificied with different penalty terms applied to enforce a maximal foraging distance.
+\item Expand the model to incorporate multiple sampling timepoints and a parameter governing local-scale floral attraction; draw comparisons between the two species to assess the degree to which individuals of these species concentrate on locally abundant resources.
+\item Perform sensitivity analyses to determine robustness of biological conclusions to different penalization terms.
+\item Develop interpretable metrics to communicate results, taking into account the dependence of baseline foraging distance estimates on model specification.
+\item Bonus: Incorporate parameters governing the interaction between local-scale patch quality and landscape-scale resource availability.
+\end{enumerate}
+\clearpage
+\printbibliography
+\end{document}
