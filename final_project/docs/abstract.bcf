@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bcf:controlfile version="3.11" bltxversion="3.20" xmlns:bcf="https://sourceforge.net/projects/biblatex">
+<bcf:controlfile version="3.11" bltxversion="3.21" xmlns:bcf="https://sourceforge.net/projects/biblatex">
   <!-- BIBER OPTIONS -->
   <bcf:options component="biber" type="global">
     <bcf:option type="singlevalued">
@@ -514,6 +514,7 @@
     <bcf:option datatype="string">alphaothers</bcf:option>
     <bcf:option datatype="string">sortalphaothers</bcf:option>
     <bcf:option datatype="string">presort</bcf:option>
+    <bcf:option datatype="string">citepagerange</bcf:option>
     <bcf:option datatype="string">texencoding</bcf:option>
     <bcf:option datatype="string">bibencoding</bcf:option>
     <bcf:option datatype="string">sortingtemplatename</bcf:option>
@@ -559,6 +560,7 @@
     <bcf:option datatype="string">datelabel</bcf:option>
     <bcf:option datatype="string">backrefstyle</bcf:option>
     <bcf:option datatype="string">arxiv</bcf:option>
+    <bcf:option datatype="string">mergedate</bcf:option>
     <bcf:option datatype="boolean">familyinits</bcf:option>
     <bcf:option datatype="boolean">giveninits</bcf:option>
     <bcf:option datatype="boolean">prefixinits</bcf:option>
@@ -643,7 +645,6 @@
     <bcf:option datatype="boolean">eprint</bcf:option>
     <bcf:option datatype="boolean">related</bcf:option>
     <bcf:option datatype="boolean">dashed</bcf:option>
-    <bcf:option datatype="boolean">mergedate</bcf:option>
     <bcf:option datatype="boolean">bibtexcaseprotection</bcf:option>
     <bcf:option datatype="integer">mincrossrefs</bcf:option>
     <bcf:option datatype="integer">minxrefs</bcf:option>
@@ -674,6 +675,7 @@
     <bcf:option datatype="string">loccittracker</bcf:option>
     <bcf:option datatype="string">uniquelist</bcf:option>
     <bcf:option datatype="string">uniquename</bcf:option>
+    <bcf:option datatype="string">mergedate</bcf:option>
     <bcf:option datatype="boolean">familyinits</bcf:option>
     <bcf:option datatype="boolean">giveninits</bcf:option>
     <bcf:option datatype="boolean">prefixinits</bcf:option>
@@ -725,7 +727,6 @@
     <bcf:option datatype="boolean">doi</bcf:option>
     <bcf:option datatype="boolean">eprint</bcf:option>
     <bcf:option datatype="boolean">related</bcf:option>
-    <bcf:option datatype="boolean">mergedate</bcf:option>
     <bcf:option datatype="boolean">bibtexcaseprotection</bcf:option>
     <bcf:option datatype="xml">labelalphatemplate</bcf:option>
     <bcf:option datatype="xml">translit</bcf:option>
@@ -764,6 +765,7 @@
     <bcf:option datatype="string" backendout="1">loccittracker</bcf:option>
     <bcf:option datatype="string">uniquelist</bcf:option>
     <bcf:option datatype="string">uniquename</bcf:option>
+    <bcf:option datatype="string" backendout="1">mergedate</bcf:option>
     <bcf:option datatype="boolean" backendout="1">familyinits</bcf:option>
     <bcf:option datatype="boolean" backendout="1">giveninits</bcf:option>
     <bcf:option datatype="boolean" backendout="1">prefixinits</bcf:option>
@@ -814,7 +816,6 @@
     <bcf:option datatype="boolean" backendout="1">doi</bcf:option>
     <bcf:option datatype="boolean" backendout="1">eprint</bcf:option>
     <bcf:option datatype="boolean" backendout="1">related</bcf:option>
-    <bcf:option datatype="boolean" backendout="1">mergedate</bcf:option>
     <bcf:option datatype="boolean" backendout="1">bibtexcaseprotection</bcf:option>
     <bcf:option datatype="integer" backendin="maxcitenames,maxbibnames,maxsortnames">maxnames</bcf:option>
     <bcf:option datatype="integer" backendin="mincitenames,minbibnames,minsortnames">minnames</bcf:option>
@@ -2373,33 +2374,6 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">phd_bombus.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1" intorder="1">kremen_crop_2002</bcf:citekey>
-    <bcf:citekey order="1" intorder="2">eilers_contribution_2011</bcf:citekey>
-    <bcf:citekey order="2" intorder="1">emmerson_chapter_2016</bcf:citekey>
-    <bcf:citekey order="3" intorder="1">bolin_scaledependent_2018</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">chapman_genetic_2003</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">jha_resource_2013</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">pope_inferring_2017</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">pope_seasonal_2018</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">carpenter_stan_2017</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">rstan</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">r_core_team_r_2021</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">pope_inferring_2017</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">betancourt_conceptual_2018</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">pope_inferring_2017</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">hart_assessing_2023</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">truett_preparation_2000</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">estoup_monoandry_1995</bcf:citekey>
-    <bcf:citekey order="16" intorder="2">estoup_genetic_1996</bcf:citekey>
-    <bcf:citekey order="16" intorder="3">reber_funk_microsatellite_2006</bcf:citekey>
-    <bcf:citekey order="16" intorder="4">stolle_novel_2009</bcf:citekey>
-    <bcf:citekey order="17" intorder="1">jones_colony_2010</bcf:citekey>
-    <bcf:citekey order="18" intorder="1">weir_estimating_1984</bcf:citekey>
-    <bcf:citekey order="19" intorder="1">rousset_genepop007_2008</bcf:citekey>
-    <bcf:citekey order="20" intorder="1">lenth_emmeans_2024</bcf:citekey>
-    <bcf:citekey order="21" intorder="1">tourvas_popgenutils_2025</bcf:citekey>
-    <bcf:citekey order="22" intorder="1">nei_molecular_1987</bcf:citekey>
-    <bcf:citekey order="23" intorder="1">goudet_hierfstat_2005</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">
@@ -2411,14 +2385,4 @@
     </bcf:sort>
   </bcf:sortingtemplate>
   <!-- DATALISTS -->
-  <bcf:datalist section="0"
-                name="none/global//global/global/global"
-                type="entry"
-                sortingtemplatename="none"
-                sortingnamekeytemplatename="global"
-                labelprefix=""
-                uniquenametemplatename="global"
-                labelalphanametemplatename="global"
-                namehashtemplatename="global">
-  </bcf:datalist>
 </bcf:controlfile>
